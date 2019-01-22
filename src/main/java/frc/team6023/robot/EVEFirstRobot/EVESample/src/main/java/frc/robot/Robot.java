@@ -12,14 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.Autonomous;
-import frc.robot.subsystems.Claw;
+
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Elevator;
+
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Wrist;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,12 +31,11 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  public static Elevator m_elevator;
+  
   public static Lift m_lift;
   public static Pivot m_pivot;
   public static Shooter m_shooter;
-  public static Wrist m_wrist;
-  public static Claw m_claw;
+ 
   public static OI m_oi;
 
   /**
@@ -48,22 +46,19 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
-    m_elevator = new Elevator();
+    
     m_lift = new Lift();
     m_pivot = new Pivot();
     m_shooter = new Shooter();
-    m_wrist = new Wrist();
-    m_claw = new Claw();
+    
     m_oi = new OI();
 
     // instantiate the command used for the autonomous period
-    m_autonomousCommand = new Autonomous();
+    
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    SmartDashboard.putData(m_elevator);
-    SmartDashboard.putData(m_wrist);
-    SmartDashboard.putData(m_claw);
+    
   }
 
   @Override
@@ -109,9 +104,9 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
-    m_wrist.log();
-    m_elevator.log();
+    m_lift.log();
+    m_pivot.log();
     m_drivetrain.log();
-    m_claw.log();
+    
   }
 }

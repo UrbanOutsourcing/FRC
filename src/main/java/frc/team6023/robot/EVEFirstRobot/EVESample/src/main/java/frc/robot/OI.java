@@ -10,15 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.SetLiftSetpoint;;
 
-import frc.robot.commands.Autonomous;
-import frc.robot.commands.CloseClaw;
-import frc.robot.commands.OpenClaw;
-import frc.robot.commands.Pickup;
-import frc.robot.commands.Place;
-import frc.robot.commands.PrepareToPickup;
-import frc.robot.commands.SetElevatorSetpoint;
-import frc.robot.commands.SetWristSetpoint;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,18 +26,11 @@ public class OI {
    */
   public OI() {
     // Put Some buttons on the SmartDashboard
-    SmartDashboard.putData("Elevator Bottom", new SetElevatorSetpoint(0));
-    SmartDashboard.putData("Elevator Platform", new SetElevatorSetpoint(0.2));
-    SmartDashboard.putData("Elevator Top", new SetElevatorSetpoint(0.3));
+    SmartDashboard.putData("Elevator Bottom", new SetLiftSetpoint(0));
+    SmartDashboard.putData("Elevator Platform", new SetLiftSetpoint(0.2));
+    SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(0.3));
 
-    SmartDashboard.putData("Wrist Horizontal", new SetWristSetpoint(0));
-    SmartDashboard.putData("Raise Wrist", new SetWristSetpoint(-45));
-
-    SmartDashboard.putData("Open Claw", new OpenClaw());
-    SmartDashboard.putData("Close Claw", new CloseClaw());
-
-    SmartDashboard.putData("Deliver Soda", new Autonomous());
-
+    
     // Create some buttons
     final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
     final JoystickButton dpadRight = new JoystickButton(m_joystick, 6);
@@ -55,15 +42,10 @@ public class OI {
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
     // Connect the buttons to commands
-    dpadUp.whenPressed(new SetElevatorSetpoint(0.2));
-    dpadDown.whenPressed(new SetElevatorSetpoint(-0.2));
-    dpadRight.whenPressed(new CloseClaw());
-    dpadLeft.whenPressed(new OpenClaw());
-
-    r1.whenPressed(new PrepareToPickup());
-    r2.whenPressed(new Pickup());
-    l1.whenPressed(new Place());
-    l2.whenPressed(new Autonomous());
+    dpadUp.whenPressed(new SetLiftSetpoint(0.2));
+    dpadDown.whenPressed(new SetLiftSetpoint(-0.2));
+    
+    
   }
 
   public Joystick getJoystick() {
