@@ -7,23 +7,28 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
-
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 
 /**
- * The elevator subsystem uses PID to go to a given height. Unfortunately, in
+ * The lift subsystem uses PID to go to a given height. Unfortunately, in
  * it's current state PID values for simulation are different than in the real
  * world do to minor differences.
  */
 public class Lift extends PIDSubsystem {
-  private final Talon m_motor;
+  private final TalonSRX m_motor;
+  private final Encoder m_encoder;
   private final AnalogPotentiometer m_pot;
+
 
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
@@ -31,7 +36,7 @@ public class Lift extends PIDSubsystem {
   private static final double kI_simulation = 0.2;
 
   /**
-   * Create a new elevator subsystem.
+   * Create a new lift subsystem.
    */
   public Lift() {
     super(kP_real, kI_real, 0);
@@ -40,19 +45,22 @@ public class Lift extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new Talon(5);
-
+    m_motor = new TalonSRX(5);
+    
+    m_encoder = new Encoder(1, 2);
     // Conversion value of potentiometer varies between the real world and
     // simulation
     if (Robot.isReal()) {
       m_pot = new AnalogPotentiometer(2, -2.0 / 5);
+      
+	    
     } else {
       m_pot = new AnalogPotentiometer(2); // Defaults to meters
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", m_motor);
-    addChild("Pot", m_pot);
+    addChild("Motor", (Sendable) m_motor);
+    addChild("Encoder", m_encoder);
   }
 
   @Override
@@ -63,16 +71,16 @@ public class Lift extends PIDSubsystem {
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    SmartDashboard.putData("Elevator Pot", (AnalogPotentiometer) m_pot);
+    SmartDashboard.putData("Lift Encoder", (Encoder) m_encoder);
   }
 
   /**
-   * Use the potentiometer as the PID sensor. This method is automatically
+   * Use the encoder as the PID sensor. This method is automatically
    * called by the subsystem.
    */
   @Override
   protected double returnPIDInput() {
-    return m_pot.get();
+    return m_encoder.get();
   }
 
   /**
@@ -81,6 +89,6 @@ public class Lift extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double power) {
-    m_motor.set(power);
+    m_motor.set(null, power);
   }
 }
