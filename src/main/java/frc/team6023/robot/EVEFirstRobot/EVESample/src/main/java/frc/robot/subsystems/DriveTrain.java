@@ -11,12 +11,9 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-//*import edu.wpi.first.wpilibj.PWMVictorSPX;
-
-import com.ctre.phoenix.motorcontrol.Faults;
-import com.ctre.phoenix.motorcontrol.InvertType;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -32,17 +29,16 @@ import frc.robot.commands.TankDriveWithJoystick;
  * and a gyro.
  */
 public class DriveTrain extends Subsystem {
-  /*private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new PWMVictorSPX(0), new PWMVictorSPX(1));
-  private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new PWMVictorSPX(2), new PWMVictorSPX(3));
-  */
   private final SpeedController m_leftMotor
+      = new SpeedControllerGroup(new WPI_VictorSPX(0), new WPI_VictorSPX(1));
+  private final SpeedController m_rightMotor
+      = new SpeedControllerGroup(new WPI_VictorSPX(2), new WPI_VictorSPX(3));
+  
+  /*private final SpeedController m_leftMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(2), new WPI_TalonSRX(20));
   private final SpeedController m_rightMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(1), new WPI_TalonSRX(10));
-  //*private final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(2);
-  //*private final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(1);
+  */
 
 
   private final DifferentialDrive m_drive

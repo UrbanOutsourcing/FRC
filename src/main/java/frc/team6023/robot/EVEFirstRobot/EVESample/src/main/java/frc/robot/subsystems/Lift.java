@@ -80,7 +80,7 @@ public class Lift extends PIDSubsystem {
    */
   @Override
   protected double returnPIDInput() {
-    return m_encoder.get();
+    return m_encoder.getDistance();
   }
 
   /**

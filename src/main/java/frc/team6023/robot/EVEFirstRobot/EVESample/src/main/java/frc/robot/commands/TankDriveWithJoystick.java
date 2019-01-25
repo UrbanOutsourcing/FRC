@@ -22,7 +22,8 @@ public class TankDriveWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
+    //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
+    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(2),Robot.m_oi.getJoystick().getRawAxis(5));
   }
 
   // Make this return true when this Command no longer needs to run execute()

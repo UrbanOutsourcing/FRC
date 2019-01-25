@@ -20,6 +20,7 @@ import frc.robot.commands.SetLiftSetpoint;;
  */
 public class OI {
   private final Joystick m_joystick = new Joystick(0);
+  
 
   /**
    * Construct the OI and all of the buttons on it.
@@ -27,8 +28,8 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     SmartDashboard.putData("Elevator Bottom", new SetLiftSetpoint(0));
-    SmartDashboard.putData("Elevator Platform", new SetLiftSetpoint(0.2));
-    SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(0.3));
+    SmartDashboard.putData("Elevator Platform", new SetLiftSetpoint(2));
+    SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(4));
 
     
     // Create some buttons
@@ -42,8 +43,8 @@ public class OI {
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
     // Connect the buttons to commands
-    dpadUp.whenPressed(new SetLiftSetpoint(0.2));
-    dpadDown.whenPressed(new SetLiftSetpoint(-0.2));
+    dpadUp.whenPressed(new SetLiftSetpoint(6));
+    dpadDown.whenPressed(new SetLiftSetpoint(2));
     
     
   }
