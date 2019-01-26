@@ -10,8 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -27,9 +26,6 @@ import frc.robot.Robot;
 public class Lift extends PIDSubsystem {
   private final TalonSRX m_motor;
   private final Encoder m_encoder;
-  private final AnalogPotentiometer m_pot;
-
-
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
   private static final double kP_simulation = 18;
@@ -47,19 +43,19 @@ public class Lift extends PIDSubsystem {
 
     m_motor = new TalonSRX(5);
     
-    m_encoder = new Encoder(1, 2);
+    m_encoder = new Encoder(5, 6);
     // Conversion value of potentiometer varies between the real world and
     // simulation
     if (Robot.isReal()) {
-      m_pot = new AnalogPotentiometer(2, -2.0 / 5);
+      //m_pot = new AnalogPotentiometer(2, -2.0 / 5);
       
 	    
     } else {
-      m_pot = new AnalogPotentiometer(2); // Defaults to meters
+      //m_pot = new AnalogPotentiometer(2); // Defaults to meters
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", (Sendable) m_motor);
+   // addChild("Motor", (Sendable) m_motor);
     addChild("Encoder", m_encoder);
   }
 

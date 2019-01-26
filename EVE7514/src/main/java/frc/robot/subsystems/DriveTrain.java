@@ -94,6 +94,7 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Right Distance", m_rightEncoder.getDistance());
     SmartDashboard.putNumber("Left Speed", m_leftEncoder.getRate());
     SmartDashboard.putNumber("Right Speed", m_rightEncoder.getRate());
+    
     SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
 
@@ -104,6 +105,7 @@ public class DriveTrain extends Subsystem {
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
+    SmartDashboard.putNumber("Power", left);
     m_drive.tankDrive(left, right);
   }
 

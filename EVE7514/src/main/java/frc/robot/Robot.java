@@ -15,8 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.DriveTrain;
 
-import frc.robot.subsystems.Lift;
+//import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Pivot;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 
 
@@ -32,8 +33,9 @@ public class Robot extends TimedRobot {
 
   public static DriveTrain m_drivetrain;
   
-  public static Lift m_lift;
+ // public static Lift m_lift;
   public static Pivot m_pivot;
+  public static Lift m_lift;
   public static Shooter m_shooter;
  
   public static OI m_oi;
@@ -47,8 +49,9 @@ public class Robot extends TimedRobot {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
     
-    m_lift = new Lift();
+    //m_lift = new Lift();
     m_pivot = new Pivot();
+    m_lift = new Lift();
     m_shooter = new Shooter();
     
     m_oi = new OI();
@@ -81,7 +84,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    m_autonomousCommand.cancel();
+    //m_autonomousCommand.cancel();
   }
 
   /**
@@ -104,7 +107,7 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
-    m_lift.log();
+   // m_lift.log();
     m_pivot.log();
     m_drivetrain.log();
     
