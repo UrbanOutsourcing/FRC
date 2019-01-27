@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 import frc.robot.subsystems.DriveTrain;
-
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Pivot;
+import frc.robot.subsystems.HatchArm;
 import frc.robot.subsystems.Shooter;
 
 
@@ -31,10 +31,11 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  
   public static Lift m_lift;
   public static Pivot m_pivot;
   public static Shooter m_shooter;
+  public static HatchArm m_hatcharm;
+
  
   public static OI m_oi;
 
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
     m_lift = new Lift();
     m_pivot = new Pivot();
     m_shooter = new Shooter();
-    
+    m_hatcharm = new HatchArm();
     m_oi = new OI();
 
     // instantiate the command used for the autonomous period

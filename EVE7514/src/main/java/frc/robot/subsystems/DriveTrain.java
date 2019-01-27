@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -21,6 +19,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.commands.TankDriveWithJoystick;
 
 /**
@@ -30,9 +29,9 @@ import frc.robot.commands.TankDriveWithJoystick;
  */
 public class DriveTrain extends Subsystem {
   private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new WPI_VictorSPX(0), new WPI_VictorSPX(1));
+      = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK));
   private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new WPI_VictorSPX(2), new WPI_VictorSPX(3));
+      = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK));
   
   /*private final SpeedController m_leftMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(2), new WPI_TalonSRX(20));
@@ -44,8 +43,8 @@ public class DriveTrain extends Subsystem {
   private final DifferentialDrive m_drive
       = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
-  private final Encoder m_leftEncoder = new Encoder(1, 2);
-  private final Encoder m_rightEncoder = new Encoder(3, 4);
+  private final Encoder m_leftEncoder = new Encoder(RobotMap.DRIVETRAIN_LEFT_CHANNELA, RobotMap.DRIVETRAIN_LEFT_CHANNELB);
+  private final Encoder m_rightEncoder = new Encoder(RobotMap.DRIVETRAIN_RIGHT_CHANNELA, RobotMap.DRIVETRAIN_RIGHT_CHANNELB);
   private final AnalogInput m_rangefinder = new AnalogInput(6);
   private final AnalogGyro m_gyro = new AnalogGyro(1);
 
