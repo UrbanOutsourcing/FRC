@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -21,8 +22,10 @@ public class HatchArm extends Subsystem {
 	DoubleSolenoid armSolenoid = null;
 
 	public HatchArm() {
+		super();
 		armSolenoid = new DoubleSolenoid(RobotMap.HATCHARM_SOLENOID_DEPLOY,
 				RobotMap.HATCHARM_SOLENOID_RETRACT);
+		addChild("Arm", armSolenoid);		
 	}
 
 	public void Deploy() {
@@ -38,4 +41,8 @@ public class HatchArm extends Subsystem {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
+	public void log() {
+		//SmartDashboard.putNumber("Arm Position", armSolenoid.get());
+		
+	  }
 }

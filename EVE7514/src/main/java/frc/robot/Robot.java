@@ -106,9 +106,11 @@ public class Robot extends TimedRobot {
    * The log method puts interesting information to the SmartDashboard.
    */
   private void log() {
-   // m_lift.log();
+    m_lift.log();
     m_pivot.log();
     m_drivetrain.log();
+    m_shooter.log();
+    m_hatcharm.log();
     
   }
 }

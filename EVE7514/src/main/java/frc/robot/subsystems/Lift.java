@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * The lift subsystem uses PID to go to a given height. Unfortunately, in
@@ -41,7 +42,7 @@ public class Lift extends PIDSubsystem {
 
     m_motor = new TalonSRX(5);
     
-    m_encoder = new Encoder(1, 2);
+    m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
 
     // Conversion value of potentiometer varies between the real world and
     // simulation
@@ -55,7 +56,7 @@ public class Lift extends PIDSubsystem {
     }
 
     // Let's name everything on the LiveWindow
-   // addChild("Motor", (Sendable) m_motor);
+    addChild("Motor", (Sendable) m_motor);
     addChild("Encoder", m_encoder);
   }
 
@@ -85,6 +86,9 @@ public class Lift extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double power) {
+    m_motor.set(null, power);
+  }
+  public void move(double power) {
     m_motor.set(null, power);
   }
 }

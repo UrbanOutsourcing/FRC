@@ -19,7 +19,8 @@ import frc.robot.commands.SetLiftSetpoint;;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private final Joystick m_joystick = new Joystick(0);
+  private final Joystick m_drive_joystick = new Joystick(0);
+  public final Joystick m_joystick = new Joystick(1);
   
 
   /**
@@ -50,6 +51,6 @@ public class OI {
   }
 
   public Joystick getJoystick() {
-    return m_joystick;
+    return m_drive_joystick;
   }
 }
