@@ -12,29 +12,29 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Have the robot drive tank style using the PS3 Joystick until interrupted.
+ * Move the lift to a given location. This command finishes when it is
+ * within the tolerance, but leaves the PID loop running to maintain the
+ * position. Other commands using the elevator should make sure they disable
+ * PID!
  */
-public class TankDriveWithJoystick extends Command {
-  public TankDriveWithJoystick() {
-    requires(Robot.m_drivetrain);
+public class SetLiftSetpoint extends Command {
+  private final double m_setpoint;
+
+  public SetLiftSetpoint(double setpoint) {
+    m_setpoint = setpoint;
+    requires(Robot.m_lift);
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  // Called just before this Command runs the first time
   @Override
-  protected void execute() {
-    //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
-    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(5),Robot.m_oi.getJoystick().getRawAxis(1));
+  protected void initialize() {
+    Robot.m_lift.enable();
+    Robot.m_lift.setSetpoint(m_setpoint);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false; // Runs until interrupted
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.m_drivetrain.drive(0, 0);
+    return Robot.m_lift.onTarget();
   }
 }
