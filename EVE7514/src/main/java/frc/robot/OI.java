@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.HatchArmDeploy;
 import frc.robot.commands.HatchArmRetract;
-import frc.robot.commands.SetLiftSetpoint;;
+import frc.robot.commands.SetLiftSetpoint;
+import frc.robot.subsystems.HatchArm;;
 
 
 
@@ -30,6 +31,7 @@ public class OI {
    */
   public OI() {
     // Put Some buttons on the SmartDashboard
+    SmartDashboard.putData("Hatch Arm", new HatchArm());
     SmartDashboard.putData("Elevator Bottom", new SetLiftSetpoint(0));
     SmartDashboard.putData("Elevator Middle", new SetLiftSetpoint(2));
     SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(4));

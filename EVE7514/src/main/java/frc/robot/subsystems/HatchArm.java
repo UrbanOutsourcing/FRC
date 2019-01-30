@@ -27,14 +27,14 @@ public class HatchArm extends Subsystem {
 		armSolenoid = new DoubleSolenoid(RobotMap.HATCHARM_SOLENOID_DEPLOY,
 				RobotMap.HATCHARM_SOLENOID_RETRACT);
 		addChild("Arm", armSolenoid);	
-		Robot.m_compressor.enabled();
-		Robot.m_compressor.start();
+		//Robot.m_compressor.enabled();
+		//Robot.m_compressor.start();
 	}
 
 	public void Deploy() {
 		
 		//armSolenoid.set(Value.kForward);
-		armSolenoid.set(0);
+		armSolenoid.set(Value.kForward);
 	}
 
 	public void Retract() {

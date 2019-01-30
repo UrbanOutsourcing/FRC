@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   public static Lift m_lift;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
-  public static Compressor m_compressor;
+  //public static Compressor m_compressor;
 
  
   public static OI m_oi;
@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     m_pivot = new Pivot();
     m_lift = new Lift();
     m_shooter = new Shooter();
-    m_compressor = new Compressor();
+    //m_compressor = new Compressor();
     m_hatcharm = new HatchArm();
     m_oi = new OI();
    

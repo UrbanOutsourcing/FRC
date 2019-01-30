@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 
@@ -24,7 +25,7 @@ import frc.robot.Robot;
  * world do to minor differences.
  */
 public class Pivot extends PIDSubsystem {
-  private final Talon m_motor;
+  private final TalonSRX m_motor;
   private final AnalogPotentiometer m_pot;
 
   private static final double kP_real = 4;
@@ -42,7 +43,7 @@ public class Pivot extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new Talon(10);
+    m_motor = new TalonSRX(10);
 
     // Conversion value of potentiometer varies between the real world and
     // simulation
@@ -53,8 +54,8 @@ public class Pivot extends PIDSubsystem {
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", m_motor);
-    addChild("Pot", m_pot);
+    addChild("Motor", (Sendable) m_motor);
+    
   }
 
   @Override
@@ -83,6 +84,6 @@ public class Pivot extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double power) {
-    m_motor.set(power);
+    m_motor.set(null, power);
   }
 }
