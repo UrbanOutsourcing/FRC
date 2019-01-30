@@ -6,14 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class HatchArmDeploy extends InstantCommand {
+public class HatchArmDeploy extends Command {
 	/**
 	 * Add your docs here.
 	 */
@@ -24,9 +23,22 @@ public class HatchArmDeploy extends InstantCommand {
 		requires(Robot.m_hatcharm);
 	}
 
-	// Called once when the command executes
+	// Called repeatedly when this Command is scheduled to run
 	@Override
-	protected void initialize() {
-		Robot.m_hatcharm.Deploy();
+	protected void execute() {
+	  //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
+	  Robot.m_hatcharm.Deploy();
+	}
+  
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+	  return false; // Runs until interrupted
+	}
+  
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	 
 	}
 }
