@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -25,11 +26,15 @@ public class HatchArm extends Subsystem {
 		super();
 		armSolenoid = new DoubleSolenoid(RobotMap.HATCHARM_SOLENOID_DEPLOY,
 				RobotMap.HATCHARM_SOLENOID_RETRACT);
-		addChild("Arm", armSolenoid);		
+		addChild("Arm", armSolenoid);	
+		Robot.m_compressor.enabled();
+		Robot.m_compressor.start();
 	}
 
 	public void Deploy() {
-		armSolenoid.set(Value.kForward);
+		
+		//armSolenoid.set(Value.kForward);
+		armSolenoid.set(0);
 	}
 
 	public void Retract() {
@@ -42,7 +47,7 @@ public class HatchArm extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void log() {
-		//SmartDashboard.putNumber("Arm Position", armSolenoid.get());
+		SmartDashboard.putData("Hatch Arm", (DoubleSolenoid) armSolenoid);
 		
 	  }
 }

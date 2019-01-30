@@ -42,7 +42,7 @@ public class Pivot extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new Talon(5);
+    m_motor = new Talon(10);
 
     // Conversion value of potentiometer varies between the real world and
     // simulation

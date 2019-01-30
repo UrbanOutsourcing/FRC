@@ -40,7 +40,7 @@ public class Lift extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new TalonSRX(5);
+    m_motor = new TalonSRX(RobotMap.LIFT);
     
     m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
 
@@ -56,7 +56,7 @@ public class Lift extends PIDSubsystem {
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", (Sendable) m_motor);
+    //addChild("Motor", (Sendable) m_motor);
     addChild("Encoder", m_encoder);
   }
 

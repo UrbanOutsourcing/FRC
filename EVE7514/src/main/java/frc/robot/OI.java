@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.HatchArmDeploy;
+import frc.robot.commands.HatchArmRetract;
 import frc.robot.commands.SetLiftSetpoint;;
 
 
@@ -29,9 +31,10 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     SmartDashboard.putData("Elevator Bottom", new SetLiftSetpoint(0));
-    SmartDashboard.putData("Elevator Platform", new SetLiftSetpoint(2));
+    SmartDashboard.putData("Elevator Middle", new SetLiftSetpoint(2));
     SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(4));
-
+    SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
+    SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     
     // Create some buttons
     final JoystickButton dpadUp = new JoystickButton(m_joystick, 5);
@@ -46,8 +49,8 @@ public class OI {
     // Connect the buttons to commands
     dpadUp.whenPressed(new SetLiftSetpoint(6));
     dpadDown.whenPressed(new SetLiftSetpoint(2));
-    
-    
+    dpadLeft.whenPressed(new HatchArmDeploy());
+    dpadRight.whenPressed(new HatchArmRetract());
   }
 
   public Joystick getJoystick() {
