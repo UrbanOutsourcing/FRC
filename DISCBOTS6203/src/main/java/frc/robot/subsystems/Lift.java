@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.LiftWithJoystick;
 
 /**
  * The lift subsystem uses PID to go to a given height. Unfortunately, in
@@ -63,6 +64,7 @@ public class Lift extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new LiftWithJoystick());
   }
 
   /**

@@ -8,8 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
+  private final Spark m_motor = new Spark(RobotMap.SHOOTER);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
