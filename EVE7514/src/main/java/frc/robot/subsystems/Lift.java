@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Sendable;
@@ -16,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.Constants;
 
 /**
  * The lift subsystem uses PID to go to a given height. Unfortunately, in
@@ -56,6 +60,23 @@ public class Lift extends PIDSubsystem {
       m_encoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
       
     }
+      // TalonSRX Encoder Configuration
+
+      /* Config the sensor used for Primary PID and sensor direction */
+      m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
+      Constants.kPIDLoopIdx,
+      Constants.kTimeoutMs);
+
+      /* Ensure sensor is positive when output is positive */
+      m_motor.setSensorPhase(Constants.kSensorPhase);
+
+      /**
+      * Set based on what direction you want forward/positive to be.
+      * This does not affect sensor phase. 
+      */ 
+      m_motor.setInverted(Constants.kMotorInvert);
+
+
 
     // Let's name everything on the LiveWindow
     //addChild("Motor", (Sendable) m_motor);
@@ -81,6 +102,8 @@ public class Lift extends PIDSubsystem {
   @Override
   protected double returnPIDInput() {
     return m_encoder.getDistance();
+    //return m_motor.getSensorCollection().getQuadraturePosition();
+    
   }
 
   /**
@@ -93,5 +116,6 @@ public class Lift extends PIDSubsystem {
   }
   public void move(double power) {
     m_motor.set(null, power);
+    
   }
 }
