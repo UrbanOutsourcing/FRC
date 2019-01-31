@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 
 /**
@@ -17,7 +16,7 @@ import frc.robot.Robot;
 public class LiftWithJoystick extends Command {
   public LiftWithJoystick() {
     requires(Robot.m_lift);
-  }
+    }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -29,7 +28,12 @@ public class LiftWithJoystick extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false; // Runs until interrupted
+    if (Robot.m_lift.m_toplimitswitch.get()) { 
+      return Robot.m_lift.m_toplimitswitch.get();
+    } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
+      return Robot.m_lift.m_bottomlimitswitch.get();
+    }
+    return false; //run until interrupted
   }
 
   // Called once after isFinished returns true

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,7 +25,7 @@ import frc.robot.RobotMap;
 public class Lift extends PIDSubsystem {
   private final TalonSRX m_motor;
   private final Encoder m_encoder;
- 
+  public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
   private static final double kP_simulation = 18;
@@ -41,8 +42,9 @@ public class Lift extends PIDSubsystem {
     setAbsoluteTolerance(0.005);
 
     m_motor = new TalonSRX(RobotMap.LIFT);
-    
     m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
+    m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
+    m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
 
     // Conversion value of potentiometer varies between the real world and
     // simulation
