@@ -51,7 +51,7 @@ public class Pivot extends PIDSubsystem {
     }
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", (Sendable) m_motor);
+   //addChild("Motor", (Sendable) m_motor);
     
   }
 

@@ -25,14 +25,14 @@ public class HatchArm extends Subsystem {
 		super();
 		armSolenoid = new DoubleSolenoid(RobotMap.HATCHARM_SOLENOID_DEPLOY,
 				RobotMap.HATCHARM_SOLENOID_RETRACT);
-		addChild("Arm", armSolenoid);	
-		//Robot.m_compressor.enabled();
-		//Robot.m_compressor.start();
+		addChild("Arm", armSolenoid);
+		SmartDashboard.putData("Hatch Arm", (DoubleSolenoid) armSolenoid);
+	
 	}
 
 	public void Deploy() {
 		
-		//armSolenoid.set(Value.kForward);
+		
 		armSolenoid.set(Value.kForward);
 	}
 
@@ -48,5 +48,5 @@ public class HatchArm extends Subsystem {
 	public void log() {
 		SmartDashboard.putData("Hatch Arm", (DoubleSolenoid) armSolenoid);
 		
-	  }
+	}
 }
