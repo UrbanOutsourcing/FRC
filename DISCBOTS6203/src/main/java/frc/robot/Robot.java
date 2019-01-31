@@ -11,13 +11,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
+import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.DriveTrain;
-
-//import frc.robot.subsystems.Lift;
-
 import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.HatchArm;
 import frc.robot.subsystems.Shooter;
 
 
@@ -32,13 +29,10 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
-  
- // public static Lift m_lift;
-  
   public static Lift m_lift;
   public static Shooter m_shooter;
- 
-  public static OI m_oi;
+  public static HatchArm m_hatcharm;
+   public static OI m_oi;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -48,19 +42,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
-    
-    //m_lift = new Lift();
     m_lift = new Lift();
     m_shooter = new Shooter();
-    
+    m_hatcharm = new HatchArm();
     m_oi = new OI();
-
+    CameraServer.getInstance().startAutomaticCapture();
+   
     // instantiate the command used for the autonomous period
     
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    
   }
 
   @Override
@@ -108,6 +100,8 @@ public class Robot extends TimedRobot {
   private void log() {
     m_lift.log();
     m_drivetrain.log();
+    m_shooter.log();
+    m_hatcharm.log();
     
   }
 }

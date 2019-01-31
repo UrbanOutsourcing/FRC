@@ -7,16 +7,14 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * The lift subsystem uses PID to go to a given height. Unfortunately, in
@@ -24,8 +22,9 @@ import frc.robot.Robot;
  * world do to minor differences.
  */
 public class Lift extends PIDSubsystem {
-  private final TalonSRX m_motor;
+  private final Spark m_motor;
   private final Encoder m_encoder;
+ 
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
   private static final double kP_simulation = 18;
@@ -41,21 +40,24 @@ public class Lift extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new TalonSRX(5);
+    m_motor = new Spark(RobotMap.LIFT);
     
-    m_encoder = new Encoder(5, 6);
+    m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
+
     // Conversion value of potentiometer varies between the real world and
     // simulation
     if (Robot.isReal()) {
-      //m_pot = new AnalogPotentiometer(2, -2.0 / 5);
+      m_encoder.setDistancePerPulse(0.042);
       
-	    
     } else {
-      //m_pot = new AnalogPotentiometer(2); // Defaults to meters
+      // Circumference in ft = 4in/12(in/ft)*PI
+      m_encoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
+      
     }
 
     // Let's name everything on the LiveWindow
-   // addChild("Motor", (Sendable) m_motor);
+    //addChild("Motor", (Sendable) m_motor);
+    //addChild("Motor", (Sendable) m_motor);
     addChild("Encoder", m_encoder);
   }
 
@@ -85,6 +87,9 @@ public class Lift extends PIDSubsystem {
    */
   @Override
   protected void usePIDOutput(double power) {
-    m_motor.set(null, power);
+    m_motor.set(power);
+  }
+  public void move(double power) {
+    m_motor.set(power);
   }
 }

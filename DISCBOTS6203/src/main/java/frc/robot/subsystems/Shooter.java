@@ -8,16 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.Victor;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.Robot;
 
 /**
  * Add your docs here.
@@ -25,7 +17,7 @@ import frc.robot.Robot;
 public class Shooter extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private final Victor m_motor = new Victor(7);
+  private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -46,5 +38,9 @@ public class Shooter extends Subsystem {
   }
   public void stop() {
     m_motor.set(0);
+  }
+  public void log() {
+    SmartDashboard.putNumber("Shooter Speed", m_motor.get());
+    
   }
 }
