@@ -76,8 +76,34 @@ public class Lift extends PIDSubsystem {
       */ 
       m_motor.setInverted(Constants.kMotorInvert);
 
+      /* Config the peak and nominal outputs, 12V means full */
+      m_motor.configNominalOutputForward(0, Constants.kTimeoutMs);
+      m_motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
+      m_motor.configPeakOutputForward(1, Constants.kTimeoutMs);
+      m_motor.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
+		/**
+		 * Config the allowable closed-loop error, Closed-Loop output will be
+		 * neutral within this range. See Table in Section 17.2.1 for native
+		 * units per rotation.
+		 */
+		m_motor.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
+		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
+		m_motor.config_kF(Constants.kPIDLoopIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+		m_motor.config_kP(Constants.kPIDLoopIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+		m_motor.config_kI(Constants.kPIDLoopIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+		m_motor.config_kD(Constants.kPIDLoopIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Let's name everything on the LiveWindow
     //addChild("Motor", (Sendable) m_motor);
     //addChild("Motor", (Sendable) m_motor);
