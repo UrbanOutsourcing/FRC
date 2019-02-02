@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
     m_oi = new OI();
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
    
     // instantiate the command used for the autonomous period
     

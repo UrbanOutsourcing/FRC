@@ -29,7 +29,7 @@ import frc.robot.Constants;
 public class Lift extends PIDSubsystem {
   private final TalonSRX m_motor;
   private final Encoder m_encoder;
-  public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
+  //public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
   private static final double kP_real = 4;
   private static final double kI_real = 0.07;
   private static final double kP_simulation = 18;
@@ -47,8 +47,8 @@ public class Lift extends PIDSubsystem {
 
     m_motor = new TalonSRX(RobotMap.LIFT);
     m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
-    m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
-    m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
+    //m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
+    //m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
 
     // Conversion value of potentiometer varies between the real world and
     // simulation
@@ -60,23 +60,23 @@ public class Lift extends PIDSubsystem {
       m_encoder.setDistancePerPulse((4.0 / 12.0 * Math.PI) / 360.0);
       
     }
-      // TalonSRX Encoder Configuration
+      /*TalonSRX Encoder Configuration
 
-      /* Config the sensor used for Primary PID and sensor direction */
+      /* Config the sensor used for Primary PID and sensor direction 
       m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
       Constants.kPIDLoopIdx,
       Constants.kTimeoutMs);
 
-      /* Ensure sensor is positive when output is positive */
+      /* Ensure sensor is positive when output is positive 
       m_motor.setSensorPhase(Constants.kSensorPhase);
 
       /**
       * Set based on what direction you want forward/positive to be.
       * This does not affect sensor phase. 
       */ 
-      m_motor.setInverted(Constants.kMotorInvert);
+      //m_motor.setInverted(Constants.kMotorInvert);
 
-      /* Config the peak and nominal outputs, 12V means full */
+      /* Config the peak and nominal outputs, 12V means full 
       m_motor.configNominalOutputForward(0, Constants.kTimeoutMs);
       m_motor.configNominalOutputReverse(0, Constants.kTimeoutMs);
       m_motor.configPeakOutputForward(1, Constants.kTimeoutMs);
@@ -87,9 +87,9 @@ public class Lift extends PIDSubsystem {
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		m_motor.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		//m_motor.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
-		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
+		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. 
 		m_motor.config_kF(Constants.kPIDLoopIdx, Constants.kGains.kF, Constants.kTimeoutMs);
 		m_motor.config_kP(Constants.kPIDLoopIdx, Constants.kGains.kP, Constants.kTimeoutMs);
 		m_motor.config_kI(Constants.kPIDLoopIdx, Constants.kGains.kI, Constants.kTimeoutMs);
@@ -97,7 +97,7 @@ public class Lift extends PIDSubsystem {
 
     
     
-    
+    */
     
     
     
