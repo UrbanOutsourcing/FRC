@@ -22,7 +22,8 @@ public class LiftWithJoystick extends Command {
   @Override
   protected void execute() {
     //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
-    Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(1));
+    //Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(1));
+    Robot.m_lift.move(.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -47,6 +47,8 @@ public class Lift extends PIDSubsystem {
 
     m_motor = new TalonSRX(RobotMap.LIFT);
     m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
+    //addChild("Lift Motor", (TalonSRX) m_motor);
+
     //m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
     //m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
 
@@ -141,7 +143,8 @@ public class Lift extends PIDSubsystem {
     m_motor.set(null, power);
   }
   public void move(double power) {
-    m_motor.set(null, power);
+    SmartDashboard.putNumber("Lift Power", power);
+    m_motor.set(ControlMode.PercentOutput, power);
     
   }
 }

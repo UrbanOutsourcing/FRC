@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.HatchArmDeploy;
 import frc.robot.commands.HatchArmRetract;
+import frc.robot.commands.LiftWithJoystick;
 import frc.robot.commands.SetLiftSetpoint;
+import frc.robot.subsystems.Lift;
 
 
 
@@ -37,10 +39,21 @@ public class OI {
     SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(4));
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
+    SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     
-    // Create some buttons
+    // Gamepad 1 Buttons
+    
+    final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 5);
+    final JoystickButton rbumper = new JoystickButton(m_drive_joystick, 6);    
+    
+    // Gamepad 2 Buttons
+    
+    final JoystickButton buttona = new JoystickButton(m_joystick, 1);
+    final JoystickButton buttony = new JoystickButton(m_joystick, 4);
+
     final JoystickButton lbumper = new JoystickButton(m_joystick, 5);
-    final JoystickButton rbumper = new JoystickButton(m_joystick, 6);
+    
+
     final JoystickButton dpadUp = new JoystickButton(m_joystick, 7);
     final JoystickButton dpadDown = new JoystickButton(m_joystick, 8);
     final JoystickButton l2 = new JoystickButton(m_joystick, 9);
@@ -51,7 +64,7 @@ public class OI {
     // Connect the buttons to commands
     dpadUp.whenPressed(new SetLiftSetpoint(6));
     dpadDown.whenPressed(new SetLiftSetpoint(2));
-    rbumper.whenPressed(new HatchArmDeploy());
+    buttony.whenPressed(new HatchArmDeploy());
     lbumper.whenPressed(new HatchArmRetract());
   }
 

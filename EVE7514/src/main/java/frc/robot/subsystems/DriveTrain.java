@@ -104,7 +104,7 @@ public class DriveTrain extends Subsystem {
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
-    SmartDashboard.putNumber("Power", left);
+    SmartDashboard.putNumber("Left Power", left);
     m_drive.tankDrive(left, right);
   }
 
