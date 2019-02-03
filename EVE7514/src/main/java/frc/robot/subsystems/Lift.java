@@ -76,7 +76,7 @@ public class Lift extends PIDSubsystem {
       * Set based on what direction you want forward/positive to be.
       * This does not affect sensor phase. 
       */ 
-      //m_motor.setInverted(Constants.kMotorInvert);
+      m_motor.setInverted(Constants.kMotorInvert);
 
       /* Config the peak and nominal outputs, 12V means full 
       m_motor.configNominalOutputForward(0, Constants.kTimeoutMs);
