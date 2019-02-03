@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.Constants;
+import frc.robot.commands.LiftWithJoystick;
 
 /**
  * The lift subsystem uses PID to go to a given height. Unfortunately, in
@@ -114,6 +115,7 @@ public class Lift extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new LiftWithJoystick());
   }
 
   /**
@@ -121,6 +123,7 @@ public class Lift extends PIDSubsystem {
    */
   public void log() {
     SmartDashboard.putData("Lift Encoder", (Encoder) m_encoder);
+    SmartDashboard.putNumber("Lift Power", m_motor.getMotorOutputPercent());
   }
 
   /**
@@ -143,7 +146,7 @@ public class Lift extends PIDSubsystem {
     m_motor.set(null, power);
   }
   public void move(double power) {
-    SmartDashboard.putNumber("Lift Power", power);
+    
     m_motor.set(ControlMode.PercentOutput, power);
     
   }
