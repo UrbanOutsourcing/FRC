@@ -111,6 +111,11 @@ public class DriveTrain extends Subsystem {
     drive(-joy.getY(), -joy.getThrottle());
   }
 
+  public void drive(double left, double right, double rotate) {
+    SmartDashboard.putNumber("Turn Degrees", rotate);
+    m_drive.arcadeDrive(left, rotate);
+  }
+
   /**
    * Get the robot's heading.
    *
