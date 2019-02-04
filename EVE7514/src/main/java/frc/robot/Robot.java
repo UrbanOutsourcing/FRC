@@ -16,7 +16,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.*;
 
 
 /**

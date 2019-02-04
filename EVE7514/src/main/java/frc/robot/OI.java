@@ -10,11 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.HatchArmDeploy;
-import frc.robot.commands.HatchArmRetract;
-import frc.robot.commands.LiftWithJoystick;
-import frc.robot.commands.SetLiftSetpoint;
-import frc.robot.subsystems.Lift;
+import frc.robot.commands.*;
+//import frc.robot.commands.HatchArmDeploy;
+//import frc.robot.commands.HatchArmRetract;
+//import frc.robot.commands.LiftWithJoystick;
+//import frc.robot.commands.SetLiftSetpoint;
+
 
 
 
@@ -24,8 +25,8 @@ import frc.robot.subsystems.Lift;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  private final Joystick m_drive_joystick = new Joystick(0);
-  public final Joystick m_joystick = new Joystick(1);
+  private final Joystick m_drive_joystick = new Joystick(RobotMap.OI_DRIVER_CONTROLLER);
+  public final Joystick m_joystick = new Joystick(RobotMap.OI_ATTACHMENTS_CONTROLLER);
   
 
   /**
@@ -34,9 +35,9 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     
-    SmartDashboard.putData("Elevator Bottom", new SetLiftSetpoint(0));
-    SmartDashboard.putData("Elevator Middle", new SetLiftSetpoint(2));
-    SmartDashboard.putData("Elevator Top", new SetLiftSetpoint(4));
+    SmartDashboard.putData("Lift Bottom", new SetLiftSetpoint(0));
+    SmartDashboard.putData("Lift Middle", new SetLiftSetpoint(2));
+    SmartDashboard.putData("Lift Top", new SetLiftSetpoint(4));
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());

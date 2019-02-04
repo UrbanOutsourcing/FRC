@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.TankDriveWithJoystick;
+import frc.robot.commands.*;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -33,13 +33,7 @@ public class DriveTrain extends Subsystem {
   private final SpeedController m_rightMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
   
-  /*private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(2), new WPI_TalonSRX(20));
-  private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(1), new WPI_TalonSRX(10));
-  */
-
-
+ 
   private final DifferentialDrive m_drive
       = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
