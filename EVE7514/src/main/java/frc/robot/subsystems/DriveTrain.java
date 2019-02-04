@@ -66,7 +66,6 @@ public class DriveTrain extends Subsystem {
     addChild("Drive", m_drive);
     addChild("Left Encoder", m_leftEncoder);
     addChild("Right Encoder", m_rightEncoder);
-    addChild("Rangefinder", m_rangefinder);
     addChild("Gyro", m_gyro);
   }
 

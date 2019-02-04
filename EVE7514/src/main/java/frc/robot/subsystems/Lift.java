@@ -100,7 +100,7 @@ public class Lift extends PIDSubsystem {
        
     
     // Let's name everything on the LiveWindow
-      addChild("Encoder", m_encoder);
+      //addChild("Encoder", m_encoder);
   }
 
   @Override

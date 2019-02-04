@@ -56,6 +56,8 @@ public class Robot extends TimedRobot {
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
+    SmartDashboard.putData(m_lift);
+    SmartDashboard.putData(m_hatcharm);
   }
 
   @Override
