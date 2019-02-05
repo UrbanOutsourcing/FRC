@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.*;
 
 /**
  * Add your docs here.
@@ -21,13 +22,13 @@ public class Shooter extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ShootWithTriggers());
   }
   public Shooter() {
     super();
 
     // Let's name everything on the LiveWindow
-    addChild("Motor", m_motor);
+   
      
   }
   public void eject() {

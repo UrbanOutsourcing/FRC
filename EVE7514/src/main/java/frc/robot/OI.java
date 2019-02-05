@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 //import frc.robot.commands.HatchArmDeploy;
@@ -27,6 +28,7 @@ import frc.robot.commands.*;
 public class OI {
   private final Joystick m_drive_joystick = new Joystick(RobotMap.OI_DRIVER_CONTROLLER);
   public final Joystick m_joystick = new Joystick(RobotMap.OI_ATTACHMENTS_CONTROLLER);
+  public final XboxController m_xjoystick = new XboxController(RobotMap.OI_ATTACHMENTS_CONTROLLER);
   
 
   /**
@@ -67,6 +69,9 @@ public class OI {
     dpadDown.whenPressed(new SetLiftSetpoint(2));
     buttony.whenPressed(new HatchArmDeploy());
     lbumper.whenPressed(new HatchArmRetract());
+    
+
+    
   }
 
   public Joystick getJoystick() {
