@@ -18,7 +18,6 @@ import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
 import frc.robot.subsystems.*;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -34,11 +33,11 @@ public class Robot extends TimedRobot {
   public static Lift m_lift;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
-   public static OI m_oi;
+  public static OI m_oi;
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
@@ -49,10 +48,9 @@ public class Robot extends TimedRobot {
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
     m_oi = new OI();
-    //CameraServer.getInstance().startAutomaticCapture();
-   
+    // CameraServer.getInstance().startAutomaticCapture();
+
     // instantiate the command used for the autonomous period
-    
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
@@ -80,7 +78,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    //m_autonomousCommand.cancel();
+    // m_autonomousCommand.cancel();
   }
 
   /**
@@ -108,6 +106,6 @@ public class Robot extends TimedRobot {
     m_drivetrain.log();
     m_shooter.log();
     m_hatcharm.log();
-    
+
   }
 }

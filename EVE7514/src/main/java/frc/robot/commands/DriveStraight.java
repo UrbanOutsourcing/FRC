@@ -25,6 +25,7 @@ public class DriveStraight extends Command {
 
   /**
    * Create a new DriveStraight command.
+   * 
    * @param distance The distance to drive
    */
   public DriveStraight(double distance) {

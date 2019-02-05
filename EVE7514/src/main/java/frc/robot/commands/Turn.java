@@ -25,6 +25,7 @@ public class Turn extends Command {
 
   /**
    * Create a new DriveStraight command.
+   * 
    * @param degree The distance to drive
    */
   public Turn(double degree) {
@@ -46,7 +47,7 @@ public class Turn extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, d -> Robot.m_drivetrain.drive(0, 0,d));
+    }, d -> Robot.m_drivetrain.drive(0, 0, d));
 
     m_pid.setAbsoluteTolerance(0.01);
     m_pid.setSetpoint(degree);
@@ -72,6 +73,6 @@ public class Turn extends Command {
   protected void end() {
     // Stop PID and the wheels
     m_pid.disable();
-    Robot.m_drivetrain.drive(0,0);
+    Robot.m_drivetrain.drive(0, 0);
   }
 }
