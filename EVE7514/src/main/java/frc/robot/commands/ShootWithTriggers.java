@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Have the robot drive tank style using the PS3 Joystick until interrupted.
+ * Operate to Shoot or Intake until interrupted
  */
 public class ShootWithTriggers extends Command {
   public ShootWithTriggers() {
@@ -21,21 +21,23 @@ public class ShootWithTriggers extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.m_joystick.getRawAxis(3) > 0) {
-      Robot.m_shooter.eject();}
-    else {Robot.m_shooter.intake(); 
+   
+    switch ( (int) Robot.m_oi.m_joystick.getRawAxis(3)) {
+      case 1:
+       new Shoot();
+       break;
+      case -1:
+       new Intake();
+       break;
+      default:
     }
+
   }
  
     // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-  /*  if (Robot.m_lift.m_toplimitswitch.get()) { 
-      return Robot.m_lift.m_toplimitswitch.get();
-    } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
-      return Robot.m_lift.m_bottomlimitswitch.get();
-     } */
-    return false; //run until interrupted
+      return false; //run until interrupted
   }
 
   // Called once after isFinished returns true
