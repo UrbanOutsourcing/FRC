@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -21,7 +20,10 @@ public class ShootWithTriggers extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   
+    if (Robot.m_oi.m_joystick.getRawAxis(3) > 0) {
+      Command m_shoot = new Shoot();
+    }
+
     switch ( (int) Robot.m_oi.m_joystick.getRawAxis(3)) {
       case 1:
        new Shoot();

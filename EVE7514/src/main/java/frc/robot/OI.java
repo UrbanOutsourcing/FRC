@@ -18,9 +18,6 @@ import frc.robot.commands.*;
 //import frc.robot.commands.SetLiftSetpoint;
 
 
-
-
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -69,6 +66,7 @@ public class OI {
     dpadDown.whenPressed(new SetLiftSetpoint(2));
     buttony.whenPressed(new HatchArmDeploy());
     lbumper.whenPressed(new HatchArmRetract());
+    rbumper.whenPressed(new Shoot());
     
 
     

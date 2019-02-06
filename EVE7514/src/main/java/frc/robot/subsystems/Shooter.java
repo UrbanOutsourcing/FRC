@@ -6,19 +6,24 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class Shooter extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
+  
+  private final TalonSRX m_motor;
+  
+  
+  //private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -28,20 +33,25 @@ public class Shooter extends Subsystem {
     super();
 
     // Let's name everything on the LiveWindow
-   
+    m_motor = new TalonSRX(RobotMap.SHOOTER);
      
   }
+  
   public void eject() {
-    m_motor.set(1);
+    //m_motor.set(1);
+    m_motor.set(ControlMode.PercentOutput, 1);
   }
   public void intake() {
-    m_motor.set(-1);
+    //m_motor.set(-1);
+    m_motor.set(ControlMode.PercentOutput, -1);
   }
   public void stop() {
-    m_motor.set(0);
+    //m_motor.set(0);
+    m_motor.set(ControlMode.PercentOutput, 0);
   }
   public void log() {
-    SmartDashboard.putNumber("Shooter Speed", m_motor.get());
+   
+    SmartDashboard.putNumber("Shooter Speed", m_motor.getMotorOutputPercent());
     
   }
 }
