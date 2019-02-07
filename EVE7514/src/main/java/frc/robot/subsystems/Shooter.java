@@ -37,16 +37,12 @@ public class Shooter extends Subsystem {
      
   }
   
-  public void eject() {
-    //m_motor.set(1);
-    m_motor.set(ControlMode.PercentOutput, 1);
-  }
-  public void intake() {
-    //m_motor.set(-1);
-    m_motor.set(ControlMode.PercentOutput, -1);
+  public void move(double power) {
+    
+    m_motor.set(ControlMode.PercentOutput, power);
   }
   public void stop() {
-    //m_motor.set(0);
+    
     m_motor.set(ControlMode.PercentOutput, 0);
   }
   public void log() {
