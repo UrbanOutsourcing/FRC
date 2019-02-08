@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -20,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.TankDriveWithJoystick;
+import frc.robot.commands.*;
 
 /**
  * The DriveTrain subsystem incorporates the sensors and actuators attached to
@@ -29,17 +30,11 @@ import frc.robot.commands.TankDriveWithJoystick;
  */
 public class DriveTrain extends Subsystem {
   private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new Spark(RobotMap.DRIVETRAIN_LEFT_FRONT), new Spark(RobotMap.DRIVETRAIN_LEFT_BACK));
+      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK));
   private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new Spark(RobotMap.DRIVETRAIN_RIGHT_FRONT), new Spark(RobotMap.DRIVETRAIN_RIGHT_BACK));
+      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
   
-  /*private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(2), new WPI_TalonSRX(20));
-  private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(1), new WPI_TalonSRX(10));
-  */
-
-
+ 
   private final DifferentialDrive m_drive
       = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
@@ -72,7 +67,6 @@ public class DriveTrain extends Subsystem {
     addChild("Drive", m_drive);
     addChild("Left Encoder", m_leftEncoder);
     addChild("Right Encoder", m_rightEncoder);
-    addChild("Rangefinder", m_rangefinder);
     addChild("Gyro", m_gyro);
   }
 
@@ -93,6 +87,7 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Right Distance", m_rightEncoder.getDistance());
     SmartDashboard.putNumber("Left Speed", m_leftEncoder.getRate());
     SmartDashboard.putNumber("Right Speed", m_rightEncoder.getRate());
+    
     SmartDashboard.putNumber("Gyro", m_gyro.getAngle());
   }
 
@@ -103,7 +98,7 @@ public class DriveTrain extends Subsystem {
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
-    SmartDashboard.putNumber("Power", left);
+    SmartDashboard.putNumber("Left Power", left);
     m_drive.tankDrive(left, right);
   }
 
@@ -114,6 +109,11 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(Joystick joy) {
     drive(-joy.getY(), -joy.getThrottle());
+  }
+
+  public void drive(double left, double right, double rotate) {
+    SmartDashboard.putNumber("Turn Degrees", rotate);
+    m_drive.arcadeDrive(left, rotate);
   }
 
   /**

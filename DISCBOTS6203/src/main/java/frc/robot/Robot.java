@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Lift;
+import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
-import frc.robot.subsystems.Shooter;
-
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,30 +29,34 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
+  public static Pivot m_pivot;
   public static Lift m_lift;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
-   public static OI m_oi;
+  public static OI m_oi;
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
+    m_pivot = new Pivot();
     m_lift = new Lift();
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
     m_oi = new OI();
-    CameraServer.getInstance().startAutomaticCapture();
-   
+    // CameraServer.getInstance().startAutomaticCapture();
+
     // instantiate the command used for the autonomous period
-    
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
+    SmartDashboard.putData(m_lift);
+    SmartDashboard.putData(m_hatcharm);
+    SmartDashboard.putData(m_shooter);
   }
 
   @Override
@@ -75,7 +79,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    //m_autonomousCommand.cancel();
+    // m_autonomousCommand.cancel();
   }
 
   /**
@@ -99,9 +103,10 @@ public class Robot extends TimedRobot {
    */
   private void log() {
     m_lift.log();
+    m_pivot.log();
     m_drivetrain.log();
     m_shooter.log();
     m_hatcharm.log();
-    
+
   }
 }

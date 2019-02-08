@@ -6,32 +6,31 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class LiftWithJoystick extends Command {
-  public LiftWithJoystick() {
-    requires(Robot.m_lift);
+public class PivotWithJoystick extends Command {
+  public PivotWithJoystick() {
+    requires(Robot.m_pivot);
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(5));
-    //Robot.m_lift.move(.5);
+    Robot.m_pivot.move(Robot.m_oi.m_joystick.getRawAxis(1));
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-  /*  if (Robot.m_lift.m_toplimitswitch.get()) { 
-      return Robot.m_lift.m_toplimitswitch.get();
-    } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
-      return Robot.m_lift.m_bottomlimitswitch.get();
+  /*  if (Robot.m_pivot.m_toplimitswitch.get()) { 
+      return Robot.m_pivot.m_toplimitswitch.get();
+    } else if (Robot.m_pivot.m_bottomlimitswitch.get()) { 
+      return Robot.m_pivot.m_bottomlimitswitch.get();
      } */
     return false; //run until interrupted
   }
@@ -39,6 +38,6 @@ public class LiftWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_lift.move(0);
+    Robot.m_pivot.move(0);
   }
 }

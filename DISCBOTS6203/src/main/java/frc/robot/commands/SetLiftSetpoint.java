@@ -35,6 +35,11 @@ public class SetLiftSetpoint extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+  /*  if (Robot.m_lift.m_toplimitswitch.get()) { 
+      return Robot.m_lift.m_toplimitswitch.get();
+    } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
+      return Robot.m_lift.m_bottomlimitswitch.get();
+    } */
     return Robot.m_lift.onTarget();
   }
 }

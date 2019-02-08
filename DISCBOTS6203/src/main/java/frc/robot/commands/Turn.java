@@ -20,15 +20,15 @@ import frc.robot.Robot;
  * command is running. The input is the averaged values of the left and right
  * encoders.
  */
-public class DriveStraight extends Command {
+public class Turn extends Command {
   private final PIDController m_pid;
 
   /**
    * Create a new DriveStraight command.
    * 
-   * @param distance The distance to drive
+   * @param degree The distance to drive
    */
-  public DriveStraight(double distance) {
+  public Turn(double degree) {
     requires(Robot.m_drivetrain);
     m_pid = new PIDController(4, 0, 0, new PIDSource() {
       PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
@@ -47,10 +47,10 @@ public class DriveStraight extends Command {
       public PIDSourceType getPIDSourceType() {
         return m_sourceType;
       }
-    }, d -> Robot.m_drivetrain.drive(d, d));
+    }, d -> Robot.m_drivetrain.drive(0, 0, d));
 
     m_pid.setAbsoluteTolerance(0.01);
-    m_pid.setSetpoint(distance);
+    m_pid.setSetpoint(degree);
   }
 
   // Called just before this Command runs the first time

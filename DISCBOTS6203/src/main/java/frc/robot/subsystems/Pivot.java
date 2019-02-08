@@ -25,7 +25,7 @@ import frc.robot.commands.*;
  * it's current state PID values for simulation are different than in the real
  * world do to minor differences.
  */
-public class Lift extends PIDSubsystem {
+public class Pivot extends PIDSubsystem {
   private final Spark m_motor;
   private final Encoder m_encoder;
   //public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
@@ -37,15 +37,15 @@ public class Lift extends PIDSubsystem {
   /**
    * Create a new lift subsystem.
    */
-  public Lift() {
+  public Pivot() {
     super(kP_real, kI_real, 0);
     if (Robot.isSimulation()) { // Check for simulation and update PID values
       getPIDController().setPID(kP_simulation, kI_simulation, 0, 0);
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new Spark(RobotMap.LIFT);
-    m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
+    m_motor = new Spark(RobotMap.PIVOT);
+    m_encoder = new Encoder(RobotMap.PIVOT_CHANNELA, RobotMap.PIVOT_CHANNELB);
     
     //m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
     //m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
@@ -103,15 +103,15 @@ public class Lift extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new LiftWithJoystick());
+    setDefaultCommand(new PivotWithJoystick());
   }
 
   /**
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    SmartDashboard.putData("Lift Encoder", (Encoder) m_encoder);
-    SmartDashboard.putNumber("Lift Power", m_motor.get());
+    SmartDashboard.putData("Pivot Encoder", (Encoder) m_encoder);
+    SmartDashboard.putNumber("Pivot Power", m_motor.get());
   }
 
   /**

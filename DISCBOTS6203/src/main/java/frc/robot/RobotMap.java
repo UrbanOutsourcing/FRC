@@ -26,6 +26,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RIGHT_FRONT = 2;
 	public static final int DRIVETRAIN_RIGHT_BACK = 3;
 	public static final int LIFT = 4;
+	public static final int PIVOT = 5;
 	public static final int SHOOTER = 7;
 
 	//Encoders
@@ -35,16 +36,22 @@ public class RobotMap {
     public static final int DRIVETRAIN_RIGHT_CHANNELA = 3;
 	public static final int LIFT_CHANNELA = 5;
 	public static final int LIFT_CHANNELB = 6;
+	public static final int PIVOT_CHANNELA = 7;
+	public static final int PIVOT_CHANNELB = 8;
 	
 	// Joystick
 	public static final int OI_DRIVER_CONTROLLER = 0;
+	public static final int OI_ATTACHMENTS_CONTROLLER = 1;
 	public static final int DRIVER_CONTROLLER_MOVE_AXIS = 1;
 	public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 2;
 
 	// Solenoids
-	public static final int HATCHARM_SOLENOID_DEPLOY = 0;
-	public static final int HATCHARM_SOLENOID_RETRACT = 1;
+	public static final int HATCHARM_SOLENOID_DEPLOY = 1;
+	public static final int HATCHARM_SOLENOID_RETRACT = 0;
 
+	//Limit Switches
+	public static final int TOP_LIMITSWITCH = 0;
+    public static final int BOTTOM_LIMITSWITCH = 1;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
