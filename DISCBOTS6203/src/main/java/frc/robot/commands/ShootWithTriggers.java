@@ -20,7 +20,11 @@ public class ShootWithTriggers extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_shooter.move(Robot.m_oi.m_joystick.getRawAxis(3));
+    if (Robot.m_oi.m_joystick.getRawAxis(3) > 0) {
+      Robot.m_shooter.move(Robot.m_oi.m_joystick.getRawAxis(3));
+    } else {
+      Robot.m_shooter.move(-1*Robot.m_oi.m_joystick.getRawAxis(2));
+    }
   }
  
     // Make this return true when this Command no longer needs to run execute()

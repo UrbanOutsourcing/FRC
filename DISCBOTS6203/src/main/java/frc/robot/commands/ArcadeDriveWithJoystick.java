@@ -14,8 +14,8 @@ import frc.robot.Robot;
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
  */
-public class TankDriveWithJoystick extends Command {
-  public TankDriveWithJoystick() {
+public class ArcadeDriveWithJoystick extends Command {
+  public ArcadeDriveWithJoystick() {
     requires(Robot.m_drivetrain);
   }
 

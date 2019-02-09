@@ -76,7 +76,7 @@ public class DriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TankDriveWithJoystick());
+    setDefaultCommand(new ArcadeDriveWithJoystick());
   }
 
   /**
@@ -99,7 +99,9 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
-    m_drive.tankDrive(left, right);
+    SmartDashboard.putNumber("Right Power", right);
+    //m_drive.tankDrive(left, right);
+    m_drive.arcadeDrive(left, right);
   }
 
   /**
