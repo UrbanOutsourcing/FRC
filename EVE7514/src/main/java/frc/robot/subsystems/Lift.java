@@ -64,8 +64,10 @@ public class Lift extends PIDSubsystem {
     }
       /*TalonSRX Encoder Configuration
 
-      /* Config the sensor used for Primary PID and sensor direction 
-      m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
+      * Config the sensor used for Primary PID and sensor direction 
+      */
+
+      /*m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 
       Constants.kPIDLoopIdx,
       Constants.kTimeoutMs);
 
@@ -123,7 +125,7 @@ public class Lift extends PIDSubsystem {
   @Override
   protected double returnPIDInput() {
     return m_encoder.getDistance();
-    //return m_motor.getSensorCollection().getQuadraturePosition();
+    //return m_motor.getSelectedSensorPosition(m_motor.getBaseID());
     
   }
 
