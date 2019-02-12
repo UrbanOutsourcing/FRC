@@ -19,7 +19,7 @@ import frc.robot.RobotMap;
  */
 public class Shooter extends Subsystem {
   
-  private final TalonSRX m_motor;
+  private final WPI_VictorSPX m_motor;
   
   
   //private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
@@ -33,7 +33,7 @@ public class Shooter extends Subsystem {
     super();
 
     // Let's name everything on the LiveWindow
-    m_motor = new TalonSRX(RobotMap.SHOOTER);
+    m_motor = new WPI_VictorSPX(RobotMap.SHOOTER);
      
   }
   
