@@ -34,12 +34,12 @@ public class HatchArm extends Subsystem {
 	public void Deploy() {
 		
 		//armSolenoid.set(Value.kOff);
-		armSolenoid.set(Value.kReverse);
+		armSolenoid.set(Value.kForward);
 	}
 
 	public void Retract() {
 		//armSolenoid.set(Value.kOff);
-		armSolenoid.set(Value.kForward);
+		armSolenoid.set(Value.kReverse);
 		
 	}
 
