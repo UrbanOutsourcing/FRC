@@ -140,4 +140,9 @@ public class Pivot extends PIDSubsystem {
     m_motor.set(ControlMode.PercentOutput, power);
     
   }
+  public void moveto(double degrees) {
+          
+    m_motor.set(ControlMode.Position, (degrees/360)*4096);
+    
+  }
 }
