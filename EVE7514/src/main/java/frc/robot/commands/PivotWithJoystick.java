@@ -8,6 +8,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Have the robot drive tank style using the PS3 Joystick until interrupted.
@@ -20,7 +21,7 @@ public class PivotWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_pivot.move(Robot.m_oi.m_joystick.getRawAxis(1));
+    Robot.m_pivot.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS));
     
   }
 

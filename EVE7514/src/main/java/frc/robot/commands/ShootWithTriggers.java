@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Operate to Shoot or Intake until interrupted
@@ -23,9 +24,9 @@ public class ShootWithTriggers extends Command {
   protected void execute() {
 
     if (Robot.m_oi.m_joystick.getRawAxis(3) > 0) {
-      Robot.m_shooter.move(Robot.m_oi.m_joystick.getRawAxis(3));
+      Robot.m_shooter.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS));
     } else {
-      Robot.m_shooter.move(-1*Robot.m_oi.m_joystick.getRawAxis(2));
+      Robot.m_shooter.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_TRIGGER_AXIS));
     }
 
   }
