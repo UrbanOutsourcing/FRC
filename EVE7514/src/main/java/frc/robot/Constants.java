@@ -16,6 +16,7 @@ public class Constants {
 	 * now we just want the primary one.
 	 */
 	public static final int kPIDLoopIdx = 0;
+	public static final int kPIDPivot = 0;
 
 	/**
 	 * Set to zero to skip waiting for confirmation, set to nonzero to wait and
