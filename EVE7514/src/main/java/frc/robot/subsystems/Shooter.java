@@ -47,7 +47,7 @@ public class Shooter extends Subsystem {
   }
   public void log() {
    
-    SmartDashboard.putNumber("Shooter Speed", m_motor.getMotorOutputPercent());
+    SmartDashboard.putNumber("Shooter Power", m_motor.getMotorOutputPercent());
     
   }
 }
