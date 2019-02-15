@@ -40,6 +40,8 @@ public class OI {
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
+    SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
+    SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(90));
     
     // Gamepad 1 Buttons
     
