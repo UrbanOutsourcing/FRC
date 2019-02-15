@@ -25,9 +25,9 @@ public class RobotMap {
 	public static final int DRIVETRAIN_LEFT_BACK = 1;
 	public static final int DRIVETRAIN_RIGHT_FRONT = 2;
 	public static final int DRIVETRAIN_RIGHT_BACK = 3;
-	public static final int LIFT = 4;
+	public static final int LIFT = 6;
 	public static final int PIVOT = 5;
-	public static final int SHOOTER = 6;
+	public static final int SHOOTER = 4;
 
 	//Encoders
 	public static final int DRIVETRAIN_LEFT_CHANNELA = 1;
