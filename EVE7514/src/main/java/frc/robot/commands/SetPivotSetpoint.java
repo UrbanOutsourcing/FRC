@@ -40,6 +40,6 @@ public class SetPivotSetpoint extends Command {
     } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
       return Robot.m_lift.m_bottomlimitswitch.get();
     } */
-    return Robot.m_lift.onTarget();
+    return Robot.m_epivot.ontarget();
   }
 }

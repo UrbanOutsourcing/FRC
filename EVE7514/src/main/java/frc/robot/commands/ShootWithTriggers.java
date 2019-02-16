@@ -23,11 +23,14 @@ public class ShootWithTriggers extends Command {
   @Override
   protected void execute() {
 
-    if (Robot.m_oi.m_joystick.getRawAxis(3) > 0) {
+    Robot.m_pivot.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
+
+
+    /*if (Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS) > 0) {
       Robot.m_shooter.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS));
     } else {
       Robot.m_shooter.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_TRIGGER_AXIS));
-    }
+    }*/
 
   }
 

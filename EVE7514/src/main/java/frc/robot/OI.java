@@ -41,8 +41,8 @@ public class OI {
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
-    SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(90));
-    
+    SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
+
     // Gamepad 1 Buttons
     
     final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 5);
@@ -67,7 +67,7 @@ public class OI {
     dpadUp.whenPressed(new SetLiftSetpoint(6));
     dpadDown.whenPressed(new SetLiftSetpoint(2));
     buttony.whenPressed(new HatchArmDeploy());
-    lbumper.whenPressed(new HatchArmRetract());
+    buttona.whenPressed(new HatchArmRetract());
     rbumper.whenPressed(new Shoot());
     
 
