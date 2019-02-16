@@ -25,9 +25,17 @@ public class RobotMap {
 	public static final int DRIVETRAIN_LEFT_BACK = 1;
 	public static final int DRIVETRAIN_RIGHT_FRONT = 2;
 	public static final int DRIVETRAIN_RIGHT_BACK = 3;
+
+	public static final int DRIVETRAIN_LF = 0;
+	public static final int DRIVETRAIN_LR = 1;
+	public static final int DRIVETRAIN_RF = 2;
+	public static final int DRIVETRAIN_RR = 3;
+
 	public static final int LIFT = 6;
 	public static final int PIVOT = 5;
 	public static final int SHOOTER = 4;
+
+
 
 	//Encoders
 	public static final int DRIVETRAIN_LEFT_CHANNELA = 1;
@@ -38,7 +46,9 @@ public class RobotMap {
 	public static final int LIFT_CHANNELB = 6;
 	public static final int PIVOT_CHANNELA = 7;
 	public static final int PIVOT_CHANNELB = 8;
+
 	
+
 	// Joystick
 	public static final int OI_DRIVER_CONTROLLER = 0;
 	public static final int OI_ATTACHMENTS_CONTROLLER = 1;
