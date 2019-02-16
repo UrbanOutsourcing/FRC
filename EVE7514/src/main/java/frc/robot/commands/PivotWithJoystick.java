@@ -15,13 +15,13 @@ import frc.robot.RobotMap;
  */
 public class PivotWithJoystick extends Command {
   public PivotWithJoystick() {
-    requires(Robot.m_pivot);
+    requires(Robot.m_epivot);
     }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_pivot.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
+    Robot.m_epivot.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
     
   }
 
@@ -39,6 +39,6 @@ public class PivotWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_pivot.move(0);
+    Robot.m_epivot.move(0);
   }
 }

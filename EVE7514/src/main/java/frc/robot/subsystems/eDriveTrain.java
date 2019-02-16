@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
@@ -41,14 +42,14 @@ public class eDriveTrain extends Subsystem {
   private final TalonSRX m_rightrear;
   private final TalonSRX m_rightmaster;
 
-  private final SpeedController m_leftMotor = new SpeedControllerGroup(
-    new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK));
+  private final SpeedController m_leftMotor = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT),
+      new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK));
   private final SpeedController m_rightMotor = new SpeedControllerGroup(
-    new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
+      new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
 
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
-  private final AnalogGyro m_gyro = new AnalogGyro(1);
-  // public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
+  //private final AnalogGyro m_gyro = new AnalogGyro(2);
+  
 
   /**
    * Create a new pivot subsystem.
@@ -56,8 +57,6 @@ public class eDriveTrain extends Subsystem {
   public eDriveTrain() {
     super();
 
-
-    
     m_leftmaster = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
     m_rightmaster = new TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT);
     m_leftrear = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK);
@@ -146,11 +145,14 @@ public class eDriveTrain extends Subsystem {
     m_rightmaster.config_kD(Constants.kSlot_Distanc, Constants.kGains_Distanc.kD, Constants.kTimeoutMs);
     m_rightmaster.config_kF(Constants.kSlot_Distanc, Constants.kGains_Distanc.kF, Constants.kTimeoutMs);
     m_rightmaster.config_IntegralZone(Constants.kSlot_Distanc, Constants.kGains_Distanc.kIzone, Constants.kTimeoutMs);
-    m_rightmaster.configClosedLoopPeakOutput(Constants.kSlot_Distanc, Constants.kGains_Distanc.kPeakOutput, Constants.kTimeoutMs);
+    m_rightmaster.configClosedLoopPeakOutput(Constants.kSlot_Distanc, Constants.kGains_Distanc.kPeakOutput,
+        Constants.kTimeoutMs);
+     zeroSensors();   
   }
+
   /**
-   * When no other command is running let the operator drive around using the
-   * PS3 joystick.
+   * When no other command is running let the operator drive around using the PS3
+   * joystick.
    */
   @Override
   public void initDefaultCommand() {
@@ -163,10 +165,17 @@ public class eDriveTrain extends Subsystem {
   public void log() {
 
     SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Right Position", m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Position", m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+  }
+
+  /* Zero quadrature encoders on Talons */
+  void zeroSensors() {
+    m_leftmaster.getSensorCollection().setQuadraturePosition(0, Constants.kTimeoutMs);
+    m_rightmaster.getSensorCollection().setQuadraturePosition(0, Constants.kTimeoutMs);
+    System.out.println("[Quadrature Encoders] All sensors are zeroed.\n");
   }
 
   /**
@@ -193,24 +202,27 @@ public class eDriveTrain extends Subsystem {
     SmartDashboard.putNumber("Turn Degrees", rotate);
     m_drive.arcadeDrive(left, rotate);
   }
+
   public void driveto(double distance) {
     SmartDashboard.putNumber("Drive Distance", distance);
 
     /* calculate targets from gamepad inputs */
-			double target_sensorUnits = (distance/12) * Constants.kRotationsPerInch;
-						
-			m_rightmaster.set(ControlMode.MotionMagic, target_sensorUnits);
-			m_leftmaster.follow(m_rightmaster);
-      m_leftrear.follow(m_rightmaster);
-      m_rightrear.follow(m_rightmaster);
+    double target_sensorUnits = (distance / 12) * Constants.kRotationsPerInch;
+
+    m_rightmaster.set(ControlMode.Position, target_sensorUnits);
+    m_leftmaster.follow(m_rightmaster);
+    m_leftrear.follow(m_rightmaster);
+    m_rightrear.follow(m_rightmaster);
   }
+
   /**
    * Get the robot's heading.
    *
    * @return The robots heading in degrees.
    */
   public double getHeading() {
-    return m_gyro.getAngle();
+    //return m_gyro.getAngle();
+    return 1;
   }
 
 }

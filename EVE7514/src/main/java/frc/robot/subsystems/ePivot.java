@@ -94,7 +94,7 @@ public class ePivot extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-   // setDefaultCommand(new PivotWithJoystick());
+   setDefaultCommand(new PivotWithJoystick());
   }
 
   /**
@@ -108,13 +108,13 @@ public class ePivot extends Subsystem {
 
   public void move(double power) {
 
-    m_motor.set(ControlMode.PercentOutput, (power / 2));
+    m_motor.set(ControlMode.PercentOutput, (power / 4));
 
   }
 
   public void moveto(double degrees) {
 
-    m_motor.set(ControlMode.Position, (degrees / 360) * 4096);
+    m_motor.set(ControlMode.Position, (degrees / 360) * Constants.kSensorUnitsPerRotation);
 
   }
 

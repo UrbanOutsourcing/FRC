@@ -17,7 +17,7 @@ import frc.robot.RobotMap;
  */
 public class TankDriveWithJoystick extends Command {
   public TankDriveWithJoystick() {
-    requires(Robot.m_drivetrain);
+    requires(Robot.m_edrivetrain);
   }
 
   // Called repeatedly when this Command is scheduled to run

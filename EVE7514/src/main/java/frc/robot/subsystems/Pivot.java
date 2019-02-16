@@ -105,7 +105,7 @@ public class Pivot extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new PivotWithJoystick());
+   // setDefaultCommand(new PivotWithJoystick());
   }
 
   /**
@@ -137,7 +137,7 @@ public class Pivot extends PIDSubsystem {
   }
   public void move(double power) {
     
-    m_motor.set(ControlMode.PercentOutput, power);
+    m_motor.set(ControlMode.PercentOutput, power/2);
     
   }
   public void moveto(double degrees) {
