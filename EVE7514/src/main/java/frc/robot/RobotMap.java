@@ -46,8 +46,8 @@ public class RobotMap {
 	public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 2;
     public static final int LEFT_TRIGGER_AXIS = 3;
 	public static final int RIGHT_TRIGGER_AXIS = 2;
-	public static final int LEFT_STICK_Y_AXIS = 5;
-    public static final int RIGHT_STICK_Y_AXIS = 1;
+	public static final int LEFT_STICK_Y_AXIS = 1;
+    public static final int RIGHT_STICK_Y_AXIS = 5;
 
 	// Solenoids
 	public static final int HATCHARM_SOLENOID_DEPLOY = 1;
