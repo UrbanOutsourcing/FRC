@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   public static DriveTrain m_drivetrain;
+  public static eDriveTrain m_edrivetrain;
   public static Pivot m_pivot;
   public static ePivot m_epivot;
   public static Lift m_lift;
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
+    m_edrivetrain = new eDriveTrain();
     m_pivot = new Pivot();
     m_epivot = new ePivot();
     m_lift = new Lift();
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
     // instantiate the command used for the autonomous period
 
     // Show what command your subsystem is running on the SmartDashboard
+    SmartDashboard.putData(m_edrivetrain);
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_lift);
     SmartDashboard.putData(m_pivot);
@@ -109,6 +112,7 @@ public class Robot extends TimedRobot {
     m_lift.log();
     m_pivot.log();
     m_drivetrain.log();
+    m_edrivetrain.log();
     m_shooter.log();
     m_hatcharm.log();
 

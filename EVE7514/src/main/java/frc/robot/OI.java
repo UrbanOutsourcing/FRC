@@ -42,6 +42,7 @@ public class OI {
     SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
+    SmartDashboard.putData("Drive Straight 12", new eDriveStraight(12));
 
     // Gamepad 1 Buttons
     
