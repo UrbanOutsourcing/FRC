@@ -108,7 +108,7 @@ public class ePivot extends Subsystem {
 
   public void move(double power) {
 
-    m_motor.set(ControlMode.PercentOutput, (power / .5));
+    m_motor.set(ControlMode.PercentOutput, (power / 2));
 
   }
 
