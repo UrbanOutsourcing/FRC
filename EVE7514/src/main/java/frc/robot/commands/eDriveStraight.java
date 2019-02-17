@@ -23,12 +23,12 @@ public class eDriveStraight extends InstantCommand {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		m_distance = distance;
-		requires(Robot.m_edrivetrain);
+		//requires(Robot.m_edrivetrain);
 	}
 
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_edrivetrain.driveto(m_distance);
+		//Robot.m_edrivetrain.driveto(m_distance);
 	}
 }
