@@ -127,8 +127,8 @@ public class eDriveTrain extends Subsystem {
     m_leftmaster.configNeutralDeadband(Constants.kNeutralDeadband, Constants.kTimeoutMs);
 
     /* Motion Magic Configurations */
-    m_rightmaster.configMotionAcceleration(2000, Constants.kTimeoutMs);
-    m_rightmaster.configMotionCruiseVelocity(2000, Constants.kTimeoutMs);
+    //m_rightmaster.configMotionAcceleration(2000, Constants.kTimeoutMs);
+    //m_rightmaster.configMotionCruiseVelocity(2000, Constants.kTimeoutMs);
 
     /**
      * Max out the peak output (for all modes). However you can limit the output of
@@ -186,7 +186,11 @@ public class eDriveTrain extends Subsystem {
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
-    m_drive.tankDrive(left, right);
+    //m_drive.tankDrive(left, right);
+    m_rightmaster.set(ControlMode.PercentOutput, right);
+    //m_rightrear.follow(m_rightmaster);
+    m_leftmaster.set(ControlMode.PercentOutput, left);
+    //m_leftrear.follow(m_leftmaster);
   }
 
   /**
