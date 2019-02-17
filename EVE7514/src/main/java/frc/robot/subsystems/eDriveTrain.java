@@ -16,11 +16,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Joystick;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -42,16 +38,7 @@ public class eDriveTrain extends Subsystem {
   private final TalonSRX m_rightrear;
   private final TalonSRX m_rightmaster;
 
-  private final SpeedController m_leftMotor = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT),
-      new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK));
-  private final SpeedController m_rightMotor = new SpeedControllerGroup(
-      new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
-
-  private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
-  //private final AnalogGyro m_gyro = new AnalogGyro(2);
-  
-
-  /**
+    /**
    * Create a new pivot subsystem.
    */
   public eDriveTrain() {
@@ -156,7 +143,7 @@ public class eDriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TankDriveWithJoystick());
+    //setDefaultCommand(new TankDriveWithJoystick());
   }
 
   /**
@@ -166,7 +153,6 @@ public class eDriveTrain extends Subsystem {
 
     SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Right Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
@@ -204,14 +190,14 @@ public class eDriveTrain extends Subsystem {
 
   public void drive(double left, double right, double rotate) {
     SmartDashboard.putNumber("Turn Degrees", rotate);
-    m_drive.arcadeDrive(left, rotate);
+   // m_drive.arcadeDrive(left, rotate);
   }
 
   public void driveto(double distance) {
     SmartDashboard.putNumber("Drive Distance", distance);
 
     /* calculate targets from gamepad inputs */
-    double target_sensorUnits = (distance / 12) * Constants.kRotationsPerInch;
+    double target_sensorUnits = (distance * 12) * Constants.kRotationsPerInch;
 
     m_rightmaster.set(ControlMode.Position, target_sensorUnits);
     m_leftmaster.follow(m_rightmaster);

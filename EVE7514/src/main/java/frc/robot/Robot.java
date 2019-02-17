@@ -42,10 +42,10 @@ public class Robot extends TimedRobot {
    * for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit() {//
     // Initialize all subsystems
     m_drivetrain = new DriveTrain();
-    m_edrivetrain = new eDriveTrain();
+    //m_edrivetrain = new eDriveTrain();
     m_pivot = new Pivot();
     m_epivot = new ePivot();
     m_lift = new Lift();
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
     // instantiate the command used for the autonomous period
 
     // Show what command your subsystem is running on the SmartDashboard
-    SmartDashboard.putData(m_edrivetrain);
+    //SmartDashboard.putData(m_edrivetrain);
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_lift);
     SmartDashboard.putData(m_pivot);
@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
     m_lift.log();
     m_pivot.log();
     m_drivetrain.log();
-    m_edrivetrain.log();
+    //m_edrivetrain.log();
     m_shooter.log();
     m_hatcharm.log();
 
