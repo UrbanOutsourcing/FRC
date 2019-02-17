@@ -75,7 +75,7 @@ public class DriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new TankDriveWithJoystick());
+    //setDefaultCommand(new TankDriveWithJoystick());
   }
 
   /**

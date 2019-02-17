@@ -111,7 +111,7 @@ public class mDriveTrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new TankDriveWithJoystick());
+    setDefaultCommand(new TankDriveWithJoystick());
   }
 
   /**

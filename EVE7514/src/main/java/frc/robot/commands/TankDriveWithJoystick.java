@@ -17,14 +17,14 @@ import frc.robot.RobotMap;
  */
 public class TankDriveWithJoystick extends Command {
   public TankDriveWithJoystick() {
-    requires(Robot.m_drivetrain);
+    requires(Robot.m_mdrivetrain);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
-    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS),Robot.m_oi.getJoystick().getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
+    Robot.m_mdrivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS),Robot.m_oi.getJoystick().getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -36,6 +36,6 @@ public class TankDriveWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_drivetrain.drive(0, 0);
+    Robot.m_mdrivetrain.drive(0, 0);
   }
 }
