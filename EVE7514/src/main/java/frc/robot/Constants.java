@@ -32,6 +32,7 @@ public class Constants {
 	public final static double kGearReduction = 1;
 	public final static double kWheelLinearRotation = kWheelDiameter * 3.1415;
 	public final static double kRotationsPerInch = (kSensorUnitsPerRotation * kGearReduction) / kWheelLinearRotation;
+	public final static double kRotationsPerDegree = (kSensorUnitsPerRotation * kGearReduction) / 360;
 
 
 	/**
