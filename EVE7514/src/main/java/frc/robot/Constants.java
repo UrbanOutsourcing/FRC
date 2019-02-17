@@ -17,6 +17,7 @@ public class Constants {
 	 */
 	public static final int kPIDLoopIdx = 0;
 	public static final int kPIDPivot = 0;
+	public static final int kPivotDamp = 3;
 /**
 	 * How many sensor units per rotation.
 	 * Using CTRE Magnetic Encoder.

@@ -17,6 +17,8 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -33,10 +35,11 @@ import frc.robot.commands.*;
  * do to minor differences.
  */
 public class eDriveTrain extends Subsystem {
-  private final TalonSRX m_leftrear;
   private final TalonSRX m_leftmaster;
-  private final TalonSRX m_rightrear;
+  private final BaseMotorController m_leftrear;
   private final TalonSRX m_rightmaster;
+  private final BaseMotorController m_rightrear;
+  
 
     /**
    * Create a new pivot subsystem.

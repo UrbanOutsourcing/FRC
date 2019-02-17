@@ -14,8 +14,8 @@ import frc.robot.RobotMap;
 /**
  * Operate to Shoot or Intake until interrupted
  */
-public class ShootWithTriggers extends Command {
-  public ShootWithTriggers() {
+public class ShootWithJoystick extends Command {
+  public ShootWithJoystick() {
     requires(Robot.m_shooter);
   }
 

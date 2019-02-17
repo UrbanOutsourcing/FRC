@@ -22,13 +22,13 @@ public class SetPivotSetpoint extends Command {
 
   public SetPivotSetpoint(double setpoint) {
     m_setpoint = setpoint;
-    requires(Robot.m_epivot);
+    requires(Robot.m_pivot);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void execute() {
-    Robot.m_epivot.moveto(m_setpoint);
+    Robot.m_pivot.moveto(m_setpoint);
     
   }
 
@@ -40,6 +40,6 @@ public class SetPivotSetpoint extends Command {
     } else if (Robot.m_lift.m_bottomlimitswitch.get()) { 
       return Robot.m_lift.m_bottomlimitswitch.get();
     } */
-    return Robot.m_epivot.ontarget();
+    return Robot.m_pivot.ontarget();
   }
 }
