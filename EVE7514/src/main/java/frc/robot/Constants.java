@@ -29,8 +29,12 @@ public class Constants {
 	 * Number of rotations to drive when performing Distance Closed Loop
 	 */
 	public final static double kWheelDiameter = 6;
+	public final static double kRobotDiameter = 48;
 	public final static double kGearReduction = 1;
+	public final static double kRobotLinearRotation = kRobotDiameter * 3.1415;
 	public final static double kWheelLinearRotation = kWheelDiameter * 3.1415;
+	public final static double kRWTurnRatio = kRobotLinearRotation/kWheelLinearRotation;
+	public final static double KRRotationsPerDegree = kRWTurnRatio/360;
 	public final static double kRotationsPerInch = (kSensorUnitsPerRotation * kGearReduction) / kWheelLinearRotation;
 	public final static double kRotationsPerDegree = (kSensorUnitsPerRotation * kGearReduction) / 360;
 
