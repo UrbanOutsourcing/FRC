@@ -58,8 +58,8 @@ public class OI {
 
     // Connect the buttons to commands
     
-    buttony.whenPressed(new HatchArmDeploy());
-    buttona.whenPressed(new HatchArmRetract());
+    buttona.whenPressed(new HatchArmDeploy());
+    buttony.whenPressed(new HatchArmRetract());
     rbumper.whenPressed(new Shoot());
        
   }
