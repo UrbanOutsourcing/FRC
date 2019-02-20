@@ -29,7 +29,6 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     
-   
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
@@ -57,10 +56,11 @@ public class OI {
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
     // Connect the buttons to commands
-    buttony.whenPressed(new HatchArmDeploy());
-    buttona.whenPressed(new HatchArmRetract());
+    
+    buttona.whenPressed(new HatchArmDeploy());
+    buttony.whenPressed(new HatchArmRetract());
     rbumper.whenPressed(new Shoot());
-        
+       
   }
 
   public Joystick getJoystick() {

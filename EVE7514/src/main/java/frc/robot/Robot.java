@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.cameraserver.*;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Pivot;
+import frc.robot.subsystems.HatchArm;
 import frc.robot.subsystems.*;
 
 /**

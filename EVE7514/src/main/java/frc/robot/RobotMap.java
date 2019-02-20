@@ -31,7 +31,7 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RF = 2;
 	public static final int DRIVETRAIN_RR = 3;
 
-	public static final int LIFT = 6;
+	
 	public static final int PIVOT = 5;
 	public static final int SHOOTER = 4;
 
