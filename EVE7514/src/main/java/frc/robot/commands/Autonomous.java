@@ -30,7 +30,7 @@ public class Autonomous extends CommandGroup {
     // a Comman
     
     addSequential(new DriveStraight(10));
-    addSequential(new Turn(90));
+   
   }
 
 }

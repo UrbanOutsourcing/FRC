@@ -12,11 +12,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
-//import frc.robot.commands.HatchArmDeploy;
-//import frc.robot.commands.HatchArmRetract;
-//import frc.robot.commands.LiftWithJoystick;
-//import frc.robot.commands.SetLiftSetpoint;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -34,12 +29,9 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     
-   // SmartDashboard.putData("Lift Bottom", new SetLiftSetpoint(0));
-   // SmartDashboard.putData("Lift Middle", new SetLiftSetpoint(2));
-   // SmartDashboard.putData("Lift Top", new SetLiftSetpoint(4));
+   
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
-    //SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
     //SmartDashboard.putData("Drive Straight 12", new eDriveStraight(12));
@@ -65,14 +57,10 @@ public class OI {
     final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
     // Connect the buttons to commands
-    dpadUp.whenPressed(new SetLiftSetpoint(6));
-    dpadDown.whenPressed(new SetLiftSetpoint(2));
     buttony.whenPressed(new HatchArmDeploy());
     buttona.whenPressed(new HatchArmRetract());
     rbumper.whenPressed(new Shoot());
-    
-
-    
+        
   }
 
   public Joystick getJoystick() {
