@@ -164,7 +164,7 @@ public class mDriveTrain extends Subsystem {
     SmartDashboard.putNumber("Drive Distance", distance);
 
     /* calculate targets */
-    double m_target_sensorUnits = (distance * 12) * Constants.kRotationsPerInch;
+    double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
 
     m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
     m_rightmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);

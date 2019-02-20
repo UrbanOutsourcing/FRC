@@ -114,7 +114,7 @@ public class Pivot extends Subsystem {
 
   public void moveto(double degrees) {
 
-    m_motor.set(ControlMode.Position, degrees * Constants.kRotationsPerDegree);
+    m_motor.set(ControlMode.Position, degrees * Constants.kWSensorUnitsPerDegree);
 
   }
 
