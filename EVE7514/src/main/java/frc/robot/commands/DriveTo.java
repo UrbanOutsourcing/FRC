@@ -13,12 +13,12 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class DriveStraight extends InstantCommand {
+public class DriveTo extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
 	private final double m_distance;
-	public DriveStraight(double distance) {
+	public DriveTo(double distance) {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -29,6 +29,6 @@ public class DriveStraight extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_mdrivetrain.driveto(m_distance);
+		Robot.m_mdrivetrain.driveto(0,m_distance);
 	}
 }

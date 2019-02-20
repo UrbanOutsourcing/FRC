@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,8 +21,8 @@ import frc.robot.Constants;
 import frc.robot.commands.*;
 
 /**
- * The DriveTrain subsystem uses PID to go a given distance. 
- * Using the TalonSRX Encoders, PID Libraries and Motion Magic Control Mode
+ * The DriveTrain subsystem uses PID to go a given distance. Using the TalonSRX
+ * Encoders, PID Libraries and Motion Magic Control Mode
  */
 public class mDriveTrain extends Subsystem {
   private final BaseMotorController m_leftrear;
@@ -31,7 +30,7 @@ public class mDriveTrain extends Subsystem {
   private final BaseMotorController m_rightrear;
   private final TalonSRX m_rightmaster;
 
-    /**
+  /**
    * Create a new pivot subsystem.
    */
   public mDriveTrain() {
@@ -58,51 +57,51 @@ public class mDriveTrain extends Subsystem {
         Constants.kTimeoutMs);
 
     /**
-		 * Configure Talon SRX Output and Sensor direction accordingly
-		 * Invert Motor to have green LEDs when driving Talon Forward / Requesting Postiive Output
-		 * Phase sensor to have positive increment when driving Talon Forward (Green LED)
-		 */
-		m_leftmaster.setSensorPhase(true);
-		m_leftmaster.setInverted(false);
+     * Configure Talon SRX Output and Sensor direction accordingly Invert Motor to
+     * have green LEDs when driving Talon Forward / Requesting Postiive Output Phase
+     * sensor to have positive increment when driving Talon Forward (Green LED)
+     */
+    m_leftmaster.setSensorPhase(true);
+    m_leftmaster.setInverted(false);
     m_rightmaster.setSensorPhase(true);
     m_rightmaster.setInverted(false);
-    
-		/* Set relevant frame periods to be at least as fast as periodic rate */
-		m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
-		m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+
+    /* Set relevant frame periods to be at least as fast as periodic rate */
+    m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
+    m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
     m_rightmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
     m_rightmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
-    
-		/* Set the peak and nominal outputs */
-		m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		m_leftmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+
+    /* Set the peak and nominal outputs */
+    m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
+    m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
     m_leftmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
     m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-		m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		m_rightmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
-		m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
-		/* Set Motion Magic gains in slot0 - see documentation */
-		m_leftmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		m_leftmaster.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
-		m_leftmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
-		m_leftmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
-		m_leftmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+    /* Set Motion Magic gains in slot0 - see documentation */
+    m_leftmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
+    m_leftmaster.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+    m_leftmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+    m_leftmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+    m_leftmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
     m_rightmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		m_rightmaster.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
-		m_rightmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
-		m_rightmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
-		m_rightmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+    m_rightmaster.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+    m_rightmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+    m_rightmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+    m_rightmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
-		/* Set acceleration and vcruise velocity - see documentation */
-		m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-		m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
+    /* Set acceleration and vcruise velocity - see documentation */
+    m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+    m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
     m_rightmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
     m_rightmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
-    
-		/* Zero the sensor */
-     zeroSensors();   
+
+    /* Zero the sensor */
+    zeroSensors();
   }
 
   /**
@@ -120,9 +119,11 @@ public class mDriveTrain extends Subsystem {
   public void log() {
 
     SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Right Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Position",
+        m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Position",
+        m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
 
   /* Zero quadrature encoders on Talons */
@@ -143,7 +144,7 @@ public class mDriveTrain extends Subsystem {
     SmartDashboard.putNumber("Right Power", right);
     m_rightmaster.set(ControlMode.PercentOutput, right);
     m_leftmaster.set(ControlMode.PercentOutput, left);
-    
+
   }
 
   /**
@@ -157,17 +158,24 @@ public class mDriveTrain extends Subsystem {
 
   public void drive(double left, double right, double rotate) {
     SmartDashboard.putNumber("Turn Degrees", rotate);
-   // m_drive.arcadeDrive(left, rotate);
+    // m_drive.arcadeDrive(left, rotate);
   }
 
-  public void driveto(double distance) {
+  public void driveto(double distance, double degrees) {
     SmartDashboard.putNumber("Drive Distance", distance);
+    SmartDashboard.putNumber("Turn Degree", degrees);
 
-    /* calculate targets */
-    double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
-
-    m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
-    m_rightmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+    if (distance > 0) {
+      /* calculate targets */
+      double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
+      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+    } else if (Math.abs(degrees) > 0) {
+      /* calculate targets */
+      double m_target_sensorUnits = degrees * Constants.kWSensorUnitsPerDegree;
+      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.MotionMagic, -m_target_sensorUnits);
+    }
   }
 
   /**
@@ -176,7 +184,7 @@ public class mDriveTrain extends Subsystem {
    * @return The robots heading in degrees.
    */
   public double getHeading() {
-    //return m_gyro.getAngle();
+    // return m_gyro.getAngle();
     return 1;
   }
 

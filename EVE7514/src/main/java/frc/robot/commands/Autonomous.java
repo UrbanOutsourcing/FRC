@@ -29,7 +29,7 @@ public class Autonomous extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a Comman
     
-    addSequential(new DriveStraight(10));
+    addSequential(new DriveTo(10));
    
   }
 
