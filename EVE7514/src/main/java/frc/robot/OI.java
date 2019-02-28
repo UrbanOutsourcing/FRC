@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.commands.*;
 
 
@@ -44,6 +45,8 @@ public class OI {
     // Gamepad 2 Buttons
     
     final JoystickButton buttona = new JoystickButton(m_joystick, 1);
+    final JoystickButton buttonx = new JoystickButton(m_joystick, 2);
+    final JoystickButton buttonb = new JoystickButton(m_joystick, 3);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
 
     final JoystickButton lbumper = new JoystickButton(m_joystick, 5);
@@ -60,6 +63,9 @@ public class OI {
     
     buttona.whenPressed(new HatchArmDeploy());
     buttony.whenPressed(new HatchArmRetract());
+
+    buttonx.whenPressed(new GearShift(-1));
+    buttonb.whenPressed(new GearShift(1));
     rbumper.whenPressed(new Shoot());
        
   }
