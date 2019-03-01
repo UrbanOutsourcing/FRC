@@ -102,8 +102,8 @@ public class Pivot extends Subsystem {
    */
   public void log() {
 
-    SmartDashboard.putNumber("Pivot Target", m_motor.getClosedLoopTarget(Constants.kPIDPivot));
-    SmartDashboard.putNumber("Pivot Position", m_motor.getSelectedSensorPosition(Constants.kPIDPivot));
+    //SmartDashboard.putNumber("Pivot Target", m_motor.getClosedLoopTarget(Constants.kPIDPivot));
+   // SmartDashboard.putNumber("Pivot Position", m_motor.getSelectedSensorPosition(Constants.kPIDPivot));
   }
 
   public void move(double power) {

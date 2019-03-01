@@ -35,6 +35,13 @@ public class GearShift extends InstantCommand {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Constants.setkMotorDamp((++Constants.kMotorDamp)* (int) m_direction);
+		if (m_direction < 0) {
+			//Constants.setkMotorDamp(++Constants.kMotorDamp);
+			Constants.setkMotorDamp(2);
+		} else {
+			Constants.setkMotorDamp(1);
+		}
+			
+		
 	}
 }
