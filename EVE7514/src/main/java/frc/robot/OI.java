@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.InstantCommand;
+
 import frc.robot.commands.*;
 
 
@@ -41,26 +41,26 @@ public class OI {
 
     // Gamepad 1 Buttons
     
-    final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 3);
-    final JoystickButton ltrigger = new JoystickButton(m_drive_joystick, 2);
+    //final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 3);
+    //final JoystickButton ltrigger = new JoystickButton(m_drive_joystick, 2);
     final JoystickButton rbumper = new JoystickButton(m_drive_joystick, 6);    
     final JoystickButton lbumper = new JoystickButton(m_drive_joystick, 5);
     // Gamepad 2 Buttons
     
     final JoystickButton buttona = new JoystickButton(m_joystick, 1);
-    final JoystickButton buttonx = new JoystickButton(m_joystick, 2);
-    final JoystickButton buttonb = new JoystickButton(m_joystick, 3);
+    //final JoystickButton buttonx = new JoystickButton(m_joystick, 2);
+    //final JoystickButton buttonb = new JoystickButton(m_joystick, 3);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
 
     
     
 
-    final JoystickButton dpadUp = new JoystickButton(m_joystick, 7);
-    final JoystickButton dpadDown = new JoystickButton(m_joystick, 8);
-    final JoystickButton l2 = new JoystickButton(m_joystick, 9);
-    final JoystickButton r2 = new JoystickButton(m_joystick, 10);
-    final JoystickButton l1 = new JoystickButton(m_joystick, 11);
-    final JoystickButton r1 = new JoystickButton(m_joystick, 12);
+    //final JoystickButton dpadUp = new JoystickButton(m_joystick, 7);
+    //final JoystickButton dpadDown = new JoystickButton(m_joystick, 8);
+    //final JoystickButton l2 = new JoystickButton(m_joystick, 9);
+    //final JoystickButton r2 = new JoystickButton(m_joystick, 10);
+    //final JoystickButton l1 = new JoystickButton(m_joystick, 11);
+    //final JoystickButton r1 = new JoystickButton(m_joystick, 12);
 
     // Connect the buttons to commands
     
