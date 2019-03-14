@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.commands.*;
 
 
@@ -34,19 +35,24 @@ public class OI {
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
+    SmartDashboard.putNumber("Motor Damp",Constants.kMotorDamp);
+    
     //SmartDashboard.putData("Drive Straight 12", new eDriveStraight(12));
 
     // Gamepad 1 Buttons
     
-    final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 5);
+    final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 3);
+    final JoystickButton ltrigger = new JoystickButton(m_drive_joystick, 2);
     final JoystickButton rbumper = new JoystickButton(m_drive_joystick, 6);    
-    
+    final JoystickButton lbumper = new JoystickButton(m_drive_joystick, 5);
     // Gamepad 2 Buttons
     
     final JoystickButton buttona = new JoystickButton(m_joystick, 1);
+    final JoystickButton buttonx = new JoystickButton(m_joystick, 2);
+    final JoystickButton buttonb = new JoystickButton(m_joystick, 3);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
 
-    final JoystickButton lbumper = new JoystickButton(m_joystick, 5);
+    
     
 
     final JoystickButton dpadUp = new JoystickButton(m_joystick, 7);
@@ -60,7 +66,10 @@ public class OI {
     
     buttona.whenPressed(new HatchArmDeploy());
     buttony.whenPressed(new HatchArmRetract());
-    rbumper.whenPressed(new Shoot());
+
+    rbumper.whenPressed(new GearShift(-1));
+    lbumper.whenPressed(new GearShift(1));
+    
        
   }
 
