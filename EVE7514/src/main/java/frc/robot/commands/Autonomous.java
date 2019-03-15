@@ -29,8 +29,13 @@ public class Autonomous extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a Comman
     
+    int i = 1;  
+
+    while (i < 3);{
     addSequential(new DriveTo(10));
-   
+    addSequential(new Turn(90));
+    i++;
+    }
   }
 
 }

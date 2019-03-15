@@ -13,22 +13,22 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class DriveTo extends InstantCommand {
+public class Turn extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
-	private final double m_distance;
-	public DriveTo(double distance) {
+	private final double m_degrees;
+	public Turn(double degrees) {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		m_distance = distance;
+		m_degrees = degrees;
 		requires(Robot.m_mdrivetrain);
 	}
 
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		Robot.m_mdrivetrain.driveto(m_distance,0);
+		Robot.m_mdrivetrain.driveto(0,m_degrees);
 	}
 }
