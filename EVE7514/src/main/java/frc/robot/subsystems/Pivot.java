@@ -77,10 +77,10 @@ public class Pivot extends Subsystem {
      * Grab the 360 degree position of the MagEncoder's absolute position, and
      * intitally set the relative sensor to match.
      */
-    int absolutePosition = m_motor.getSensorCollection().getPulseWidthPosition();
+    //int absolutePosition = m_motor.getSensorCollection().getPulseWidthPosition();
 
     /* Mask out overflows, keep bottom 12 bits */
-    absolutePosition &= 0xFFF;
+    /*absolutePosition &= 0xFFF;
     if (Constants.kSensorPhase) {
       absolutePosition *= -1;
     }
@@ -89,7 +89,8 @@ public class Pivot extends Subsystem {
     }
 
     /* Set the quadrature (relative) sensor to match absolute */
-    m_motor.setSelectedSensorPosition(absolutePosition, Constants.kPIDPivot, Constants.kTimeoutMs);
+    //m_motor.setSelectedSensorPosition(absolutePosition, Constants.kPIDPivot, Constants.kTimeoutMs);
+    m_motor.setSelectedSensorPosition(0, Constants.kPIDPivot, Constants.kTimeoutMs);
   }
 
   @Override
@@ -102,8 +103,8 @@ public class Pivot extends Subsystem {
    */
   public void log() {
 
-    SmartDashboard.putNumber("Pivot Target", m_motor.getClosedLoopTarget(Constants.kPIDPivot));
-    SmartDashboard.putNumber("Pivot Position", m_motor.getSelectedSensorPosition(Constants.kPIDPivot));
+    //SmartDashboard.putNumber("Pivot Target", m_motor.getClosedLoopTarget(Constants.kPIDPivot));
+   // SmartDashboard.putNumber("Pivot Position", m_motor.getSelectedSensorPosition(Constants.kPIDPivot));
   }
 
   public void move(double power) {

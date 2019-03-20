@@ -11,6 +11,13 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+
 import edu.wpi.first.cameraserver.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pivot;
@@ -32,7 +39,9 @@ public class Robot extends TimedRobot {
   public static Pivot m_pivot;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
+  public static HabClimb m_habclimb;
   public static OI m_oi;
+  
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -46,10 +55,29 @@ public class Robot extends TimedRobot {
     m_pivot = new Pivot();
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
+    m_habclimb = new HabClimb();
     m_oi = new OI();
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
 
-    // instantiate the command used for the autonomous period
+    // CameraServer Instantiation 
+
+    new Thread(() -> {
+      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      camera.setResolution(640, 480);
+      
+      CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSource outputStream = CameraServer.getInstance().putVideo("EVECam1", 640, 480);
+      
+      Mat source = new Mat();
+      Mat output = new Mat();
+      
+      while(!Thread.interrupted()) {
+          cvSink.grabFrame(source);
+          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+          outputStream.putFrame(output);
+      }
+  }).start();
+
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_mdrivetrain);
@@ -61,7 +89,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand.start(); // schedule the autonomous command (example)
+   // m_autonomousCommand.start(); // schedule the autonomous command (example)
   }
 
   /**
@@ -69,8 +97,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
-    log();
+    teleopPeriodic();
+    //Scheduler.getInstance().run();
+    //log();
   }
 
   @Override
