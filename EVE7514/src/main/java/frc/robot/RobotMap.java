@@ -57,6 +57,8 @@ public class RobotMap {
 	// Solenoids
 	public static final int HATCHARM_SOLENOID_DEPLOY = 1;
 	public static final int HATCHARM_SOLENOID_RETRACT = 0;
+	public static final int HABCLIMB_SOLENOID_DEPLOY = 6;
+	public static final int HABCLIMB_SOLENOID_RETRACT = 7;
 
 	//Limit Switches
 	public static final int TOP_LIMITSWITCH = 0;

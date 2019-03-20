@@ -20,7 +20,7 @@ public class Constants {
 
 	public  static int kMotorDamp = 1;
 	
-	public static final int kPivotDamp = 3;
+	public static final int kPivotDamp = 2;
 /**
 	 * How many sensor units per rotation.
 	 * Using CTRE Magnetic Encoder.

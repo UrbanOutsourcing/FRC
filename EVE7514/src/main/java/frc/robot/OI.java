@@ -33,6 +33,8 @@ public class OI {
     
     SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
     SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
+    SmartDashboard.putData("Hab Climb Deploy", new HabClimbDeploy());
+    SmartDashboard.putData("Hab Climb Retract", new HabClimbRetract());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
     SmartDashboard.putNumber("Motor Damp",Constants.kMotorDamp);
@@ -66,6 +68,9 @@ public class OI {
     
     buttona.whenPressed(new HatchArmDeploy());
     buttony.whenPressed(new HatchArmRetract());
+    buttonx.whenPressed(new HabClimbDeploy());
+    buttonb.whenPressed(new HabClimbRetract());
+
 
     rbumper.whenPressed(new GearShift(-1));
     lbumper.whenPressed(new GearShift(1));

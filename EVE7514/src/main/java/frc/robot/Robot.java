@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
   public static Pivot m_pivot;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
+  public static HabClimb m_habclimb;
   public static OI m_oi;
   
 
@@ -56,6 +57,7 @@ public class Robot extends TimedRobot {
     m_pivot = new Pivot();
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
+    m_habclimb = new HabClimb();
     m_oi = new OI();
     //CameraServer.getInstance().startAutomaticCapture();
 

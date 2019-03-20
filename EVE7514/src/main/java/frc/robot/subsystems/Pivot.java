@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -27,7 +26,7 @@ import frc.robot.commands.*;
  * do to minor differences.
  */
 public class Pivot extends Subsystem {
-  private final WPI_VictorSPX m_motor;
+  private final TalonSRX m_motor;
   // public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
 
   /**
@@ -36,7 +35,7 @@ public class Pivot extends Subsystem {
   public Pivot() {
     super();
 
-    m_motor = new WPI_VictorSPX(RobotMap.PIVOT);
+    m_motor = new TalonSRX(RobotMap.PIVOT);
 
     // m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);
     // m_bottomlimitswitch = new DigitalInput(RobotMap.BOTTOM_LIMITSWITCH);
