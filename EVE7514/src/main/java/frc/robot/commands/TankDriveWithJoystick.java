@@ -25,7 +25,7 @@ public class TankDriveWithJoystick extends Command {
   protected void execute() {
     //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
    
-    Robot.m_drivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS)/Constants.kMotorDamp,Robot.m_oi.getJoystick().getRawAxis(RobotMap.LEFT_STICK_Y_AXIS)/Constants.kMotorDamp);
+    Robot.m_mdrivetrain.drive(Robot.m_oi.getJoystick().getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS)/Constants.kMotorDamp,Robot.m_oi.getJoystick().getRawAxis(RobotMap.LEFT_STICK_Y_AXIS)/Constants.kMotorDamp);
   }
 
   // Make this return true when this Command no longer needs to run execute()
