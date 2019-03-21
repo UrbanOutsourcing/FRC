@@ -22,6 +22,7 @@ import edu.wpi.first.cameraserver.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
+import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.*;
 
 /**
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
     m_hatcharm = new HatchArm();
     m_habclimb = new HabClimb();
     m_oi = new OI();
+    m_autonomousCommand = new Autonomous();
     //CameraServer.getInstance().startAutomaticCapture();
 
     // CameraServer Instantiation 
@@ -89,7 +91,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-   // m_autonomousCommand.start(); // schedule the autonomous command (example)
+    m_autonomousCommand.start(); // schedule the autonomous command (example)
   }
 
   /**
@@ -97,9 +99,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    teleopPeriodic();
-    //Scheduler.getInstance().run();
-    //log();
+    
+    //teleopPeriodic();
+    Scheduler.getInstance().run();
+    log();
   }
 
   @Override
@@ -108,7 +111,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    // m_autonomousCommand.cancel();
+    m_autonomousCommand.cancel();
   }
 
   /**

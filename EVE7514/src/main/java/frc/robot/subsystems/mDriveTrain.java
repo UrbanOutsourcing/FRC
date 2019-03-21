@@ -43,10 +43,12 @@ public class mDriveTrain extends Subsystem {
 
     m_leftrear.configFactoryDefault();
     m_rightrear.configFactoryDefault();
-    m_leftrear.follow(m_leftmaster);
-    m_rightrear.follow(m_rightmaster);
+    
     m_leftmaster.configFactoryDefault();
     m_rightmaster.configFactoryDefault();
+
+    m_leftrear.follow(m_leftmaster);
+    m_rightrear.follow(m_rightmaster);
 
     // *TalonSRX Encoder Configuration
     // *Config the sensor used for Primary PID and sensor direction
@@ -95,13 +97,13 @@ public class mDriveTrain extends Subsystem {
     m_rightmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
     /* Set acceleration and vcruise velocity - see documentation */
-    m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-    m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
-    m_rightmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-    m_rightmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
+    //m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+   // m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
+   // m_rightmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+    //m_rightmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
 
     /* Zero the sensor */
-    zeroSensors();
+    //zeroSensors();
   }
 
   /**
@@ -118,10 +120,10 @@ public class mDriveTrain extends Subsystem {
    */
   public void log() {
 
-    SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    //SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Position",
         m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    //SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position",
         m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
@@ -142,8 +144,10 @@ public class mDriveTrain extends Subsystem {
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
     SmartDashboard.putNumber("Right Power", right);
-    m_rightmaster.set(ControlMode.PercentOutput, right);
+    m_rightmaster.set(ControlMode.PercentOutput, -right);
     m_leftmaster.set(ControlMode.PercentOutput, left);
+    //m_rightrear.set(ControlMode.PercentOutput, right);
+    //m_leftrear.set(ControlMode.PercentOutput, left);
 
   }
 
@@ -168,13 +172,13 @@ public class mDriveTrain extends Subsystem {
     if (distance > 0) {
       /* calculate targets */
       double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
-      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
-      m_rightmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+      m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.Position, m_target_sensorUnits);
     } else if (Math.abs(degrees) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = degrees * Constants.kWSensorUnitsPerDegree;
-      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
-      m_rightmaster.set(ControlMode.MotionMagic, -m_target_sensorUnits);
+      m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.Position, -m_target_sensorUnits);
     }
   }
 
