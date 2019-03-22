@@ -22,7 +22,7 @@ import edu.wpi.first.cameraserver.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
-import frc.robot.commands.Autonomous;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     m_hatcharm = new HatchArm();
     m_habclimb = new HabClimb();
     m_oi = new OI();
-    m_autonomousCommand = new Autonomous();
+    m_autonomousCommand = new EVEAuto();
     //CameraServer.getInstance().startAutomaticCapture();
 
     // CameraServer Instantiation 

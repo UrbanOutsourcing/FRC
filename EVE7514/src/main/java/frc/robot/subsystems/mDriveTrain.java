@@ -97,13 +97,13 @@ public class mDriveTrain extends Subsystem {
     m_rightmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
     /* Set acceleration and vcruise velocity - see documentation */
-    //m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-   // m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
-   // m_rightmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-    //m_rightmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
+    m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+    m_leftmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
+    m_rightmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+    m_rightmaster.configMotionAcceleration(6000, Constants.kTimeoutMs);
 
     /* Zero the sensor */
-    //zeroSensors();
+    zeroSensors();
   }
 
   /**
@@ -172,13 +172,13 @@ public class mDriveTrain extends Subsystem {
     if (distance > 0) {
       /* calculate targets */
       double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
-      m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
-      m_rightmaster.set(ControlMode.Position, m_target_sensorUnits);
+      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
     } else if (Math.abs(degrees) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = degrees * Constants.kWSensorUnitsPerDegree;
-      m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
-      m_rightmaster.set(ControlMode.Position, -m_target_sensorUnits);
+      m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
+      m_rightmaster.set(ControlMode.MotionMagic, -m_target_sensorUnits);
     }
   }
 

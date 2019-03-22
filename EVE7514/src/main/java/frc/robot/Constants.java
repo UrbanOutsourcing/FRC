@@ -38,10 +38,13 @@ public class Constants {
 	public final static double kWheelLinearRotation = kWheelDiameter * 3.1415;
 	public final static double kRWTurnRatio = kRobotLinearRotation/kWheelLinearRotation;
 	public final static double KRobotLinearRotationsPerDegree = kRobotLinearRotation/360;
+	public final static double KPivotGearReduction = 45;
+	
 	
 	public final static double kWSensorUnitsPerInch = (kSensorUnitsPerRotation * kGearReduction) / kWheelLinearRotation;
 	public final static double kWSensorUnitsPerDegree = kRWTurnRatio * ((kSensorUnitsPerRotation * kGearReduction) / 360);
-
+	public final static double KPivotSensorUnitsPerDegree = (kSensorUnitsPerRotation * KPivotGearReduction)/360;
+	
 
 	/**
 	 * Using the configSelectedFeedbackCoefficient() function, scale units to 3600 per rotation.

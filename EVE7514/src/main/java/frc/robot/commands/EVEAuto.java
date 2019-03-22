@@ -7,12 +7,12 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-//import frc.robot.commands.*;
-public class Autonomous extends CommandGroup {
+import frc.robot.commands.*;
+public class EVEAuto extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public Autonomous() {
+  public EVEAuto() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
@@ -29,13 +29,14 @@ public class Autonomous extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a Comman
     
-    int i = 1;  
+    //int i = 1;  
 
-    while (i < 3);{
-    addSequential(new DriveTo(10));
-    addSequential(new Turn(90));
-    i++;
-    }
+    //while (i < 3);{
+    addSequential(new SetPivotSetpoint(45));  
+    //addSequential(new DriveTo(1000000));
+    //addSequential(new Turn(360));
+    //i++;
+   // }
   }
 
 }
