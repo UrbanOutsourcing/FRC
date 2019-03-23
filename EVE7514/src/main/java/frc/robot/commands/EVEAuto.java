@@ -32,8 +32,8 @@ public class EVEAuto extends CommandGroup {
     //int i = 1;  
 
     //while (i < 3);{
-    addSequential(new SetPivotSetpoint(45));  
-    //addSequential(new DriveTo(1000000));
+    //addSequential(new SetPivotSetpoint(45));  
+    addSequential(new DriveTo(10));
     //addSequential(new Turn(360));
     //i++;
    // }

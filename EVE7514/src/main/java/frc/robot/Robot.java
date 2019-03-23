@@ -19,7 +19,6 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 
 import edu.wpi.first.cameraserver.*;
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.HatchArm;
 import frc.robot.commands.*;
@@ -35,7 +34,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
-  public static DriveTrain m_drivetrain;
+  
   public static mDriveTrain m_mdrivetrain;
   public static Pivot m_pivot;
   public static Shooter m_shooter;
