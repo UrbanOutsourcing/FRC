@@ -99,6 +99,21 @@ public class mDriveTrain extends Subsystem {
     m_rightmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
     m_rightmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
+
+/**
+		 * Grab the 360 degree position of the MagEncoder's absolute
+		 * position, and intitally set the relative sensor to match.
+		 */
+		int absolutePosition = m_rightmaster.getSensorCollection().getPulseWidthPosition();
+    
+		/* Mask out overflows, keep bottom 12 bits */
+		absolutePosition &= 0xFFF;
+		if (Constants.kSensorPhase) { absolutePosition *= -1; }
+		if (Constants.kMotorInvert) { absolutePosition *= -1; }
+		
+		/* Set the quadrature (relative) sensor to match absolute */
+		m_rightmaster.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    m_leftmaster.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     /* Set acceleration and vcruise velocity - see documentation */
     /*
     m_leftmaster.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
@@ -129,11 +144,11 @@ public class mDriveTrain extends Subsystem {
         m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
     //SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position",
-        m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+        m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
 
   /* Zero quadrature encoders on Talons */
-  void zeroSensors() {
+  public void zeroSensors() {
     m_leftmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     m_rightmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     System.out.println("[Quadrature Encoders] All sensors are zeroed.\n");
@@ -172,12 +187,16 @@ public class mDriveTrain extends Subsystem {
   public void driveto(double distance, double degrees) {
     SmartDashboard.putNumber("Drive Distance", distance);
     SmartDashboard.putNumber("Turn Degree", degrees);
-
+    //double m_rightmasterposition =  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY); 
+   
     if (Math.abs(distance) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
+      //m_leftmaster.set(ControlMode.Position, (m_rightmasterposition + m_target_sensorUnits));
+      //m_rightmaster.set(ControlMode.Position, (m_rightmasterposition + m_target_sensorUnits));
       m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
       m_rightmaster.set(ControlMode.Position, m_target_sensorUnits);
+      
     } else if (Math.abs(degrees) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = degrees * Constants.kWSensorUnitsPerDegree;
@@ -185,7 +204,12 @@ public class mDriveTrain extends Subsystem {
       m_rightmaster.set(ControlMode.Position, -m_target_sensorUnits);
     }
   }
-
+  public boolean ontarget() {
+    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 1) {
+      return true;
+    }
+    return false;
+  }
   /**
    * Get the robot's heading.
    *

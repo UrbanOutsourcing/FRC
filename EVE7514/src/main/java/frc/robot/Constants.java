@@ -18,6 +18,8 @@ public class Constants {
 	public static final int kPIDLoopIdx = 0;
 	public static final int kPIDPivot = 0;
 
+	public static double kSensorPosition = 0;
+
 	public  static int kMotorDamp = 1;
 	
 	public static final int kPivotDamp = 2;
@@ -101,7 +103,7 @@ public class Constants {
      * Not all set of Gains are used in this project and may be removed as desired.
      * 
 	 * 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
-	public final static Gains kGains_Distanc = new Gains( 0.1, 0.0,  0.0, 0.0,            100,  0.50 );
+	public final static Gains kGains_Distanc = new Gains( 0.25, 0.0,  0.0, 0.0,            100,  0.50 );
 	public final static Gains kGains_Turning = new Gains( 2.0, 0.0,  4.0, 0.0,            200,  1.00 );
 	public final static Gains kGains_Velocit = new Gains( 0.1, 0.0, 20.0, 1023.0/6800.0,  300,  0.50 );
 	public final static Gains kGains_MotProf = new Gains( 1.0, 0.0,  0.0, 1023.0/6800.0,  400,  1.00 );
@@ -117,5 +119,17 @@ public class Constants {
 	 */
 	public static int getkMotorDamp() {
 		return kMotorDamp;
+	}
+	/**
+	 * @param kMotorDamp the kMotorDamp to set
+	 */
+	public static void setkSensorPosition(double kSensorPosition) {
+		Constants.kSensorPosition = kSensorPosition;
+	}
+	/**
+	 * @return the kMotorDamp
+	 */
+	public static double getSensorPosition() {
+		return kSensorPosition;
 	}
 }

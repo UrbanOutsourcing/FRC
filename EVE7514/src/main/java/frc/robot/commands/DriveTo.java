@@ -7,13 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
-public class DriveTo extends InstantCommand {
+public class DriveTo extends Command {
 	/**
 	 * Add your docs here.
 	 */
@@ -23,12 +23,27 @@ public class DriveTo extends InstantCommand {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		m_distance = distance;
+		Robot.m_mdrivetrain.zeroSensors();
 		requires(Robot.m_mdrivetrain);
 	}
 
-	// Called once when the command executes
+		
+	// Called repeatedly when this Command is scheduled to run
 	@Override
-	protected void initialize() {
+	protected void execute() {
 		Robot.m_mdrivetrain.driveto(m_distance,0);
+	}
+  
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+
+	  return Robot.m_mdrivetrain.ontarget();
+	}
+  
+	// Called once after isFinished returns true
+	@Override
+	protected void end() {
+	 
 	}
 }
