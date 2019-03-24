@@ -129,7 +129,7 @@ public class mmDriveTrain extends Subsystem {
   }
 
   /* Zero quadrature encoders on Talons */
-  void zeroSensors() {
+  public void zeroSensors() {
     m_leftmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     m_rightmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     System.out.println("[Quadrature Encoders] All sensors are zeroed.\n");
@@ -181,7 +181,12 @@ public class mmDriveTrain extends Subsystem {
       m_rightmaster.set(ControlMode.MotionMagic, -m_target_sensorUnits);
     }
   }
-
+  public boolean ontarget() {
+    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 110) {
+      return true;
+    }
+    return false;
+  }
   /**
    * Get the robot's heading.
    *

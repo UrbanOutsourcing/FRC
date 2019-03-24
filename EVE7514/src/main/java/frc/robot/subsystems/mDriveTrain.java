@@ -78,12 +78,12 @@ public class mDriveTrain extends Subsystem {
     /* Set the peak and nominal outputs */
     m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputForward(.5, Constants.kTimeoutMs);
     m_leftmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
     m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputForward(.5, Constants.kTimeoutMs);
     m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
     /* Set Motion Magic gains in slot0 - see documentation */
@@ -93,6 +93,7 @@ public class mDriveTrain extends Subsystem {
     m_leftmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
     m_leftmaster.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
     m_leftmaster.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+    
     m_rightmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
     m_rightmaster.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
     m_rightmaster.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
@@ -139,13 +140,14 @@ public class mDriveTrain extends Subsystem {
    */
   public void log() {
 
-    //SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Right Position",
-        m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
-    //SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Position",
-        m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Position", m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Power", m_rightmaster.getMotorOutputPercent());
+    SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Position", m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Power", m_leftmaster.getMotorOutputPercent());
   }
+
 
   /* Zero quadrature encoders on Talons */
   public void zeroSensors() {
@@ -205,7 +207,7 @@ public class mDriveTrain extends Subsystem {
     }
   }
   public boolean ontarget() {
-    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 1) {
+    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 110) {
       return true;
     }
     return false;

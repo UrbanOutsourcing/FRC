@@ -23,7 +23,7 @@ public class DriveTo extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		m_distance = distance;
-		Robot.m_mdrivetrain.zeroSensors();
+		//Robot.m_mdrivetrain.zeroSensors();
 		requires(Robot.m_mdrivetrain);
 	}
 
@@ -44,6 +44,6 @@ public class DriveTo extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-	 
+		Robot.m_mdrivetrain.zeroSensors();
 	}
 }

@@ -44,7 +44,7 @@ public class Constants {
 	
 	
 	public final static double kWSensorUnitsPerInch = (kSensorUnitsPerRotation * kGearReduction) / kWheelLinearRotation;
-	public final static double kWSensorUnitsPerDegree = kRWTurnRatio * ((kSensorUnitsPerRotation * kGearReduction) / 360);
+	public final static double kWSensorUnitsPerDegree = (kSensorUnitsPerRotation * kGearReduction) / 360;
 	public final static double KPivotSensorUnitsPerDegree = (kSensorUnitsPerRotation * KPivotGearReduction)/360;
 	
 
@@ -95,7 +95,7 @@ public class Constants {
 	 * Gains used in Positon Closed Loop, to be adjusted accordingly
      * Gains(kp, ki, kd, kf, izone, peak output);
      */
-	public static final Gains kGains = new Gains(0.25, 0.0, 1.0, 0.0, 0, 1.0);
+	public static final Gains kGains = new Gains(0.125, 0.0, 1.0, 0.0, 0, 0.25);
 	
 	/**
 	 * PID Gains may have to be adjusted based on the responsiveness of control loop.
@@ -103,7 +103,7 @@ public class Constants {
      * Not all set of Gains are used in this project and may be removed as desired.
      * 
 	 * 	                                    			  kP   kI   kD   kF               Iz    PeakOut */
-	public final static Gains kGains_Distanc = new Gains( 0.25, 0.0,  0.0, 0.0,            100,  0.50 );
+	public final static Gains kGains_Distanc = new Gains( 0.25, 0.0,  0.0, 0.0,          100,  0.50 );
 	public final static Gains kGains_Turning = new Gains( 2.0, 0.0,  4.0, 0.0,            200,  1.00 );
 	public final static Gains kGains_Velocit = new Gains( 0.1, 0.0, 20.0, 1023.0/6800.0,  300,  0.50 );
 	public final static Gains kGains_MotProf = new Gains( 1.0, 0.0,  0.0, 1023.0/6800.0,  400,  1.00 );

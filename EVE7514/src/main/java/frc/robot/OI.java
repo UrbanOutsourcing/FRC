@@ -36,7 +36,8 @@ public class OI {
     SmartDashboard.putData("Hab Climb Retract", new HabClimbRetract());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(-800));
-    SmartDashboard.putData("Drive  To", new DriveTo(5));
+    SmartDashboard.putData("Drive  To", new DriveTo(10));
+    SmartDashboard.putData("Turn", new Turn(90));
     SmartDashboard.putNumber("Motor Damp",Constants.kMotorDamp);
     
     //SmartDashboard.putData("Drive Straight 12", new eDriveStraight(12));
