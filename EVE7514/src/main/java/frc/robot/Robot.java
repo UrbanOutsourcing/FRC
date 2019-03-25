@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
   
-  public static mDriveTrain m_mdrivetrain;
+  public static  DriveTrain m_drivetrain;
   public static Pivot m_pivot;
   public static Shooter m_shooter;
   public static HatchArm m_hatcharm;
@@ -51,8 +51,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {//
     // Initialize all subsystems
-    //m_drivetrain = new DriveTrain();
-    m_mdrivetrain = new mDriveTrain();
+    m_drivetrain = new DriveTrain();
+   
     m_pivot = new Pivot();
     m_shooter = new Shooter();
     m_hatcharm = new HatchArm();
@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
 
 
     // Show what command your subsystem is running on the SmartDashboard
-    SmartDashboard.putData(m_mdrivetrain);
+    SmartDashboard.putData(m_drivetrain);
     //SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_pivot);
     SmartDashboard.putData(m_hatcharm);
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
   private void log() {
     m_pivot.log();
     //m_drivetrain.log();
-    m_mdrivetrain.log();
+    m_drivetrain.log();
     m_shooter.log();
     m_hatcharm.log();
 

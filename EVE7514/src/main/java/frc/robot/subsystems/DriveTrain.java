@@ -24,7 +24,7 @@ import frc.robot.commands.*;
  * The DriveTrain subsystem uses PID to go a given distance. Using the TalonSRX
  * Encoders, PID Libraries and Motion Magic Control Mode
  */
-public class mDriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem {
   private final BaseMotorController m_leftrear;
   private final TalonSRX m_leftmaster;
   private final BaseMotorController m_rightrear;
@@ -33,7 +33,7 @@ public class mDriveTrain extends Subsystem {
   /**
    * Create a new pivot subsystem.
    */
-  public mDriveTrain() {
+  public DriveTrain() {
     super();
 
     m_leftmaster = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
@@ -78,14 +78,22 @@ public class mDriveTrain extends Subsystem {
     /* Set the peak and nominal outputs */
     m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputForward(.5, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
 
     m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputForward(.5, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
 
+    /**
+		 * Config the allowable closed-loop error, Closed-Loop output will be
+		 * neutral within this range. See Table in Section 17.2.1 for native
+		 * units per rotation.
+		 */
+    m_leftmaster.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    m_rightmaster.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    
     /* Set Motion Magic gains in slot0 - see documentation */
     
     m_leftmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
@@ -142,9 +150,11 @@ public class mDriveTrain extends Subsystem {
 
     SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Position", m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Error", m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Power", m_rightmaster.getMotorOutputPercent());
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position", m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Error", m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Power", m_leftmaster.getMotorOutputPercent());
   }
 
@@ -165,11 +175,11 @@ public class mDriveTrain extends Subsystem {
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
     SmartDashboard.putNumber("Right Power", right);
+    m_rightmaster.configPeakOutputReverse(1, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputReverse(1, Constants.kTimeoutMs);
     m_rightmaster.set(ControlMode.PercentOutput, -right);
     m_leftmaster.set(ControlMode.PercentOutput, left);
-    //m_rightrear.set(ControlMode.PercentOutput, right);
-    //m_leftrear.set(ControlMode.PercentOutput, left);
-
+   
   }
 
   /**

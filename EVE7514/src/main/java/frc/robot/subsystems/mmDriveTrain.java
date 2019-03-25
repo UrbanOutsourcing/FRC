@@ -25,6 +25,7 @@ import frc.robot.commands.*;
  * Encoders, PID Libraries and Motion Magic Control Mode
  */
 public class mmDriveTrain extends Subsystem {
+  
   private final BaseMotorController m_leftrear;
   private final TalonSRX m_leftmaster;
   private final BaseMotorController m_rightrear;
@@ -43,7 +44,7 @@ public class mmDriveTrain extends Subsystem {
 
     m_leftrear.configFactoryDefault();
     m_rightrear.configFactoryDefault();
-    
+
     m_leftmaster.configFactoryDefault();
     m_rightmaster.configFactoryDefault();
 
@@ -69,20 +70,22 @@ public class mmDriveTrain extends Subsystem {
     m_rightmaster.setInverted(false);
 
     /* Set relevant frame periods to be at least as fast as periodic rate */
+    /*
     m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
     m_leftmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
     m_rightmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
     m_rightmaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
 
-    /* Set the peak and nominal outputs */
-    m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-    m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
-    m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
-    m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+     /* Set the peak and nominal outputs */
+     m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
+     m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+     m_leftmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+     m_leftmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+ 
+     m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
+     m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
+     m_rightmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+     m_rightmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
 
     /* Set Motion Magic gains in slot0 - see documentation */
     m_leftmaster.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
@@ -120,10 +123,12 @@ public class mmDriveTrain extends Subsystem {
    */
   public void log() {
 
-    //SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    // SmartDashboard.putNumber("DriveTrain Right Target",
+    // m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Right Position",
         m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
-    //SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
+    // SmartDashboard.putNumber("DriveTrain Left Target",
+    // m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position",
         m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
@@ -146,9 +151,6 @@ public class mmDriveTrain extends Subsystem {
     SmartDashboard.putNumber("Right Power", right);
     m_rightmaster.set(ControlMode.PercentOutput, -right);
     m_leftmaster.set(ControlMode.PercentOutput, left);
-    //m_rightrear.set(ControlMode.PercentOutput, right);
-    //m_leftrear.set(ControlMode.PercentOutput, left);
-
   }
 
   /**
@@ -169,7 +171,7 @@ public class mmDriveTrain extends Subsystem {
     SmartDashboard.putNumber("Drive Distance", distance);
     SmartDashboard.putNumber("Turn Degree", degrees);
 
-    if (distance > 0) {
+    if (Math.abs(distance) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
       m_leftmaster.set(ControlMode.MotionMagic, m_target_sensorUnits);
@@ -181,12 +183,14 @@ public class mmDriveTrain extends Subsystem {
       m_rightmaster.set(ControlMode.MotionMagic, -m_target_sensorUnits);
     }
   }
+
   public boolean ontarget() {
     if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 110) {
       return true;
     }
     return false;
   }
+
   /**
    * Get the robot's heading.
    *
