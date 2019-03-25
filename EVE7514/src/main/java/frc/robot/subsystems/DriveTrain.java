@@ -78,13 +78,13 @@ public class DriveTrain extends Subsystem {
     /* Set the peak and nominal outputs */
     m_leftmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_leftmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
     m_rightmaster.configNominalOutputForward(0, Constants.kTimeoutMs);
     m_rightmaster.configNominalOutputReverse(0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputForward(Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputReverse(-Constants.kGains.kPeakOutput, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputForward(1, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 
     /**
 		 * Config the allowable closed-loop error, Closed-Loop output will be
@@ -163,6 +163,7 @@ public class DriveTrain extends Subsystem {
   public void zeroSensors() {
     m_leftmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     m_rightmaster.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+   
     System.out.println("[Quadrature Encoders] All sensors are zeroed.\n");
   }
 
