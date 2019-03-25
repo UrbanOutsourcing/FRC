@@ -39,7 +39,7 @@ public class Constants {
 	public final static double kRobotLinearRotation = kRobotDiameter * 3.1415;
 	public final static double kWheelLinearRotation = kWheelDiameter * 3.1415;
 	public final static double kRWTurnRatio = kRobotLinearRotation/kWheelLinearRotation;
-	public final static double KRobotLinearRotationsPerDegree = kRobotLinearRotation/360;
+	public final static double KRobotLinearRotationsPerDegree = (kRobotLinearRotation* kRWTurnRatio)/360;
 	public final static double KPivotGearReduction = 45;
 	
 	

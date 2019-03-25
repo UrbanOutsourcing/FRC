@@ -211,7 +211,7 @@ public class DriveTrain extends Subsystem {
       
     } else if (Math.abs(degrees) > 0) {
       /* calculate targets */
-      double m_target_sensorUnits = degrees * Constants.kWSensorUnitsPerDegree;
+      double m_target_sensorUnits = degrees * Constants.KRobotLinearRotationsPerDegree;
       m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
       m_rightmaster.set(ControlMode.Position, -m_target_sensorUnits);
     }
