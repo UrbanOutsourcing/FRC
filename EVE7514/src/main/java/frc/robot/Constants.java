@@ -34,12 +34,12 @@ public class Constants {
 	 * Number of rotations to drive when performing Distance Closed Loop
 	 */
 	public final static double kWheelDiameter = 6; //Inches
-	public final static double kRobotDiameter = 48; //Inches
+	public final static double kRobotDiameter = 30; //Inches
 	public final static double kGearReduction = 1;
 	public final static double kRobotLinearRotation = kRobotDiameter * 3.1415;
 	public final static double kWheelLinearRotation = kWheelDiameter * 3.1415;
 	public final static double kRWTurnRatio = kRobotLinearRotation/kWheelLinearRotation;
-	public final static double KRobotLinearRotationsPerDegree = (kRobotLinearRotation* kRWTurnRatio)/360;
+	public final static double KRobotLinearRotationsPerDegree = (kSensorUnitsPerRotation* kRWTurnRatio)/360;
 	public final static double KPivotGearReduction = 45;
 	
 	
@@ -95,7 +95,7 @@ public class Constants {
 	 * Gains used in Positon Closed Loop, to be adjusted accordingly
      * Gains(kp, ki, kd, kf, izone, peak output);
      */
-	public static final Gains kGains = new Gains(0.125, 0.0, 1.0, 0.0, 0, 0.25);
+	public static final Gains kGains = new Gains(0.5, 0.0, 1.0, 0.0, 0, 0.25);
 	
 	/**
 	 * PID Gains may have to be adjusted based on the responsiveness of control loop.

@@ -23,7 +23,7 @@ public class Turn extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		m_degree = degrees;
-		//Robot.m_mdrivetrain.zeroSensors();
+		Robot.m_drivetrain.zeroSensors();
 		requires(Robot.m_drivetrain);
 	}
 

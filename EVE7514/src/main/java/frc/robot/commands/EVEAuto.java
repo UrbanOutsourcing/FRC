@@ -8,6 +8,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.*;
+import frc.robot.Robot;
 public class EVEAuto extends CommandGroup {
   /**
    * Add your docs here.
@@ -32,10 +33,11 @@ public class EVEAuto extends CommandGroup {
     //int i = 1;  
 
     //while (i < 3);{
-    //addSequential(new SetPivotSetpoint(45));  
+    //addSequential(new SetPivotSetpoint(45)); 
+    Robot.m_drivetrain.zeroSensors();
     addSequential(new DriveTo(10));
     addSequential(new DriveTo(5));
-    //addSequential(new Turn(360));
+    addSequential(new Turn(45));
     //i++;
    // }
   }

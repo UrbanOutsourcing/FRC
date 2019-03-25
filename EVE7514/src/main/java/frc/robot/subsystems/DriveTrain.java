@@ -154,7 +154,7 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("DriveTrain Right Power", m_rightmaster.getMotorOutputPercent());
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Position", m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Error", m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Error", m_leftmaster.getClosedLoopError(Constants.PID_PRIMARY));
     SmartDashboard.putNumber("DriveTrain Left Power", m_leftmaster.getMotorOutputPercent());
   }
 
@@ -204,8 +204,7 @@ public class DriveTrain extends Subsystem {
     if (Math.abs(distance) > 0) {
       /* calculate targets */
       double m_target_sensorUnits = (distance * 12) * Constants.kWSensorUnitsPerInch;
-      //m_leftmaster.set(ControlMode.Position, (m_rightmasterposition + m_target_sensorUnits));
-      //m_rightmaster.set(ControlMode.Position, (m_rightmasterposition + m_target_sensorUnits));
+      
       m_leftmaster.set(ControlMode.Position, m_target_sensorUnits);
       m_rightmaster.set(ControlMode.Position, m_target_sensorUnits);
       
@@ -217,7 +216,8 @@ public class DriveTrain extends Subsystem {
     }
   }
   public boolean ontarget() {
-    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 110) {
+      
+    if (m_rightmaster.getClosedLoopError(Constants.PID_PRIMARY) < 1 && m_leftmaster.getClosedLoopError(Constants.PID_PRIMARY) < 1) {
       return true;
     }
     return false;
