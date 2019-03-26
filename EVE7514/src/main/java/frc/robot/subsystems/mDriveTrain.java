@@ -38,8 +38,8 @@ public class mDriveTrain extends Subsystem {
 
     m_leftmaster = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
     m_rightmaster = new TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT);
-    m_leftrear = new VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK);
-    m_rightrear = new VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK);
+    m_leftrear = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK);
+    m_rightrear = new TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK);
 
     m_leftrear.configFactoryDefault();
     m_rightrear.configFactoryDefault();
