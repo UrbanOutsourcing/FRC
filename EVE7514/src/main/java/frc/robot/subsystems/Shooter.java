@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 /**
@@ -39,7 +40,7 @@ public class Shooter extends Subsystem {
   
   public void move(double power) {
     
-    m_motor.set(ControlMode.PercentOutput, power);
+    m_motor.set(ControlMode.PercentOutput, power/Constants.kShooterDamp);
   }
   public void stop() {
     

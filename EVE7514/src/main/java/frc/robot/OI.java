@@ -52,7 +52,8 @@ public class OI {
     final JoystickButton buttonx = new JoystickButton(m_joystick, 2);
     final JoystickButton buttonb = new JoystickButton(m_joystick, 3);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
-
+    final JoystickButton rbumper2 = new JoystickButton(m_joystick, 6);    
+    final JoystickButton lbumper2 = new JoystickButton(m_joystick, 5);
     
     
 
@@ -73,7 +74,8 @@ public class OI {
 
     rbumper.whenPressed(new GearShift(-1));
     lbumper.whenPressed(new GearShift(1));
-    
+    rbumper2.whenPressed(new ShooterShift(-1));
+    lbumper2.whenPressed(new ShooterShift(1));
        
   }
 

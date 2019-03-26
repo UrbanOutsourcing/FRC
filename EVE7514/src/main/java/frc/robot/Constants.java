@@ -19,8 +19,8 @@ public class Constants {
 	public static final int kPIDPivot = 0;
 
 	public  static int kMotorDamp = 1;
-	
 	public static final int kPivotDamp = 2;
+	public static int kShooterDamp = 2;
 /**
 	 * How many sensor units per rotation.
 	 * Using CTRE Magnetic Encoder.
@@ -117,5 +117,17 @@ public class Constants {
 	 */
 	public static int getkMotorDamp() {
 		return kMotorDamp;
+	}
+	/**
+	 * @param kShooterDamp the kShooterDamp to set
+	 */
+	public static void setShooterDamp(int kShooterDamp) {
+		Constants.kShooterDamp = kShooterDamp;
+	}
+	/**
+	 * @return the kShooterrDamp
+	 */
+	public static int getShooterDamp() {
+		return kShooterDamp;
 	}
 }
