@@ -21,7 +21,7 @@ public class PivotWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_pivot.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS));
+    Robot.m_pivot.move(-1*Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
     
   }
 
