@@ -12,10 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CameraServer;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Pivot;
-import frc.robot.subsystems.HatchArm;
 import frc.robot.subsystems.*;
 
 /**
@@ -34,8 +30,9 @@ public class Robot extends TimedRobot {
   public static Pivot m_pivot;
   public static Lift m_lift;
   public static Shooter m_shooter;
-  public static HatchArm m_hatcharm;
+  public static GearShift m_gearshift;
   public static OI m_oi;
+  public static Vacuum m_vacuum;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -50,9 +47,10 @@ public class Robot extends TimedRobot {
     m_pivot = new Pivot();
     m_lift = new Lift();
     m_shooter = new Shooter();
-    m_hatcharm = new HatchArm();
+    m_vacuum = new Vacuum();
+    m_gearshift = new GearShift();
     m_oi = new OI();
-    CameraServer.getInstance().startAutomaticCapture();
+    //CameraServer.getInstance().startAutomaticCapture();
 
     // instantiate the command used for the autonomous period
 
@@ -61,7 +59,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_lift);
     SmartDashboard.putData(m_pivot);
-    SmartDashboard.putData(m_hatcharm);
+    SmartDashboard.putData(m_gearshift);
     SmartDashboard.putData(m_shooter);
   }
 
@@ -114,7 +112,8 @@ public class Robot extends TimedRobot {
     //m_edrivetrain.log();
     //m_mdrivetrain.log();
     m_shooter.log();
-    m_hatcharm.log();
+    m_vacuum.log();
+    m_gearshift.log();
 
   }
 }

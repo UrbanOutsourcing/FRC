@@ -20,13 +20,13 @@ public class Intake extends Command {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.m_shooter);
+		requires(Robot.m_vacuum);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-	   Robot.m_shooter.move(-1);
+	   Robot.m_vacuum.move(-1);
 	}
   
 	// Make this return true when this Command no longer needs to run execute()

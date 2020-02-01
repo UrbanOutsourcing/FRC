@@ -37,8 +37,8 @@ public class OI {
    // SmartDashboard.putData("Lift Bottom", new SetLiftSetpoint(0));
    // SmartDashboard.putData("Lift Middle", new SetLiftSetpoint(2));
    // SmartDashboard.putData("Lift Top", new SetLiftSetpoint(4));
-    SmartDashboard.putData("Hatch Arm Deploy", new HatchArmDeploy());
-    SmartDashboard.putData("Hatch Arm Retract", new HatchArmRetract());
+    SmartDashboard.putData("Gear Shift Deploy", new GearShiftDeploy());
+    SmartDashboard.putData("Gear Shift Retract", new GearShiftRetract());
     //SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
@@ -67,8 +67,8 @@ public class OI {
     // Connect the buttons to commands
     dpadUp.whenPressed(new SetLiftSetpoint(6));
     dpadDown.whenPressed(new SetLiftSetpoint(2));
-    buttony.whenPressed(new HatchArmDeploy());
-    buttona.whenPressed(new HatchArmRetract());
+    buttony.whenPressed(new GearShiftDeploy());
+    buttona.whenPressed(new GearShiftRetract());
     rbumper.whenPressed(new Shoot());
     
 
