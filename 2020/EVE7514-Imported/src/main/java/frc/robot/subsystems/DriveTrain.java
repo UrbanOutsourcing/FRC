@@ -28,11 +28,14 @@ import frc.robot.commands.*;
  * and a gyro.
  */
 public class DriveTrain extends Subsystem {
-  private final SpeedController m_leftMotor
+  /*private final SpeedController m_leftMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK));
   private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));
-  
+      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));*/
+  private final SpeedController m_leftMotor
+      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_TOP));
+  private final SpeedController m_rightMotor
+      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_TOP));
  
   private final DifferentialDrive m_drive
       = new DifferentialDrive(m_leftMotor, m_rightMotor);
