@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -33,9 +34,9 @@ public class DriveTrain extends Subsystem {
   private final SpeedController m_rightMotor
       = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK));*/
   private final SpeedController m_leftMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_TOP));
+      = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_TOP));
   private final SpeedController m_rightMotor
-      = new SpeedControllerGroup(new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_TOP));
+      = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_TOP));
  
   private final DifferentialDrive m_drive
       = new DifferentialDrive(m_leftMotor, m_rightMotor);

@@ -34,9 +34,7 @@ public class OI {
   public OI() {
     // Put Some buttons on the SmartDashboard
     
-   // SmartDashboard.putData("Lift Bottom", new SetLiftSetpoint(0));
-   // SmartDashboard.putData("Lift Middle", new SetLiftSetpoint(2));
-   // SmartDashboard.putData("Lift Top", new SetLiftSetpoint(4));
+   
     SmartDashboard.putData("Gear Shift Deploy", new GearShiftDeploy());
     SmartDashboard.putData("Gear Shift Retract", new GearShiftRetract());
     //SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());

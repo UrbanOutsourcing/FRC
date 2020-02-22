@@ -10,6 +10,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -76,20 +79,20 @@ public class Pivot extends Subsystem {
     /**
      * Grab the 360 degree position of the MagEncoder's absolute position, and
      * intitally set the relative sensor to match.
-     */
-    int absolutePosition = m_motor.getSensorCollection().getPulseWidthPosition();
+     
+    int absolutePosition = m_motor.getSensorCollection().getPulseWidthPosition();*/
 
-    /* Mask out overflows, keep bottom 12 bits */
+    /* Mask out overflows, keep bottom 12 bits 
     absolutePosition &= 0xFFF;
     if (Constants.kSensorPhase) {
       absolutePosition *= -1;
     }
     if (Constants.kMotorInvert) {
       absolutePosition *= -1;
-    }
+    }*/
 
-    /* Set the quadrature (relative) sensor to match absolute */
-    m_motor.setSelectedSensorPosition(absolutePosition, Constants.kPIDPivot, Constants.kTimeoutMs);
+    /* Set the quadrature (relative) sensor to match absolute 
+    m_motor.setSelectedSensorPosition(absolutePosition, Constants.kPIDPivot, Constants.kTimeoutMs); */
   }
 
   @Override

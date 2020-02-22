@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -28,7 +30,7 @@ import frc.robot.commands.*;
  * world do to minor differences.
  */
 public class Lift extends PIDSubsystem {
-  private final TalonSRX m_motor;
+  private final VictorSPX m_motor;
   private final Encoder m_encoder;
   //public final DigitalInput m_toplimitswitch,m_bottomlimitswitch ;
   private static final double kP_real = 4;
@@ -46,7 +48,7 @@ public class Lift extends PIDSubsystem {
     }
     setAbsoluteTolerance(0.005);
 
-    m_motor = new TalonSRX(RobotMap.LIFT);
+    m_motor = new VictorSPX(RobotMap.LIFT);
     m_encoder = new Encoder(RobotMap.LIFT_CHANNELA, RobotMap.LIFT_CHANNELB);
     
     //m_toplimitswitch = new DigitalInput(RobotMap.TOP_LIMITSWITCH);

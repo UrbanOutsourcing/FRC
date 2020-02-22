@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData(m_edrivetrain);
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_lift);
-    SmartDashboard.putData(m_pivot);
+    /*SmartDashboard.putData(m_pivot);*/
     SmartDashboard.putData(m_gearshift);
     SmartDashboard.putData(m_shooter);
   }
@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    // m_autonomousCommand.cancel();
+    //m_autonomousCommand.cancel();
   }
 
   /**
@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
    */
   private void log() {
     m_lift.log();
-    m_pivot.log();
+    /*m_pivot.log();*/
     m_drivetrain.log();
     //m_edrivetrain.log();
     //m_mdrivetrain.log();
