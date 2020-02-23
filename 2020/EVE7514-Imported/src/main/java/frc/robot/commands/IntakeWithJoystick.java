@@ -14,16 +14,16 @@ import frc.robot.RobotMap;
 /**
  * Operate to Shoot or Intake until interrupted
  */
-public class VacuumWithJoystick extends Command {
-  public VacuumWithJoystick() {
-    requires(Robot.m_vacuum);
+public class IntakeWithJoystick extends Command {
+  public IntakeWithJoystick() {
+    requires(Robot.m_intake);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    Robot.m_vacuum.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS));
+    Robot.m_intake.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.RIGHT_STICK_Y_AXIS));
 
 
     /*if (Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS) > 0) {

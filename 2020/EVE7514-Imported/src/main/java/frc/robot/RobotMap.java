@@ -28,15 +28,11 @@ public class RobotMap {
 	public static final int DRIVETRAIN_RIGHT_BACK = 9;
 	public static final int DRIVETRAIN_RIGHT_TOP = 0;
 	
-	public static final int DRIVETRAIN_LF = 0;
-	public static final int DRIVETRAIN_LR = 1;
-	public static final int DRIVETRAIN_RF = 2;
-	public static final int DRIVETRAIN_RR = 3;
-
+	
 	public static final int LIFT = 2;
 	public static final int PIVOT = 6;
-	public static final int VACUUM = 1;
-	public static final int SHOOTER = 8;
+	public static final int INTAKE1 = 1;
+	public static final int INTAKE2 = 8;
 
 
 

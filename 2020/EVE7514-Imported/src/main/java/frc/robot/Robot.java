@@ -29,10 +29,10 @@ public class Robot extends TimedRobot {
   public static mDriveTrain m_mdrivetrain;
   public static Pivot m_pivot;
   public static Lift m_lift;
-  public static Shooter m_shooter;
+  public static Intake m_intake;
   public static GearShift m_gearshift;
   public static OI m_oi;
-  public static Vacuum m_vacuum;
+  
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -46,8 +46,7 @@ public class Robot extends TimedRobot {
      //m_edrivetrain = new mDriveTrain();
     m_pivot = new Pivot();
     m_lift = new Lift();
-    m_shooter = new Shooter();
-    m_vacuum = new Vacuum();
+    m_intake = new Intake();
     m_gearshift = new GearShift();
     m_oi = new OI();
     //CameraServer.getInstance().startAutomaticCapture();
@@ -58,9 +57,9 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData(m_edrivetrain);
     SmartDashboard.putData(m_drivetrain);
     SmartDashboard.putData(m_lift);
-    /*SmartDashboard.putData(m_pivot);*/
+    SmartDashboard.putData(m_pivot);
     SmartDashboard.putData(m_gearshift);
-    SmartDashboard.putData(m_shooter);
+    SmartDashboard.putData(m_intake);
   }
 
   @Override
@@ -107,12 +106,11 @@ public class Robot extends TimedRobot {
    */
   private void log() {
     m_lift.log();
-    /*m_pivot.log();*/
+    m_pivot.log();
     m_drivetrain.log();
     //m_edrivetrain.log();
     //m_mdrivetrain.log();
-    m_shooter.log();
-    m_vacuum.log();
+    m_intake.log();
     m_gearshift.log();
 
   }

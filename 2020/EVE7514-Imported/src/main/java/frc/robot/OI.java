@@ -67,7 +67,7 @@ public class OI {
     dpadDown.whenPressed(new SetLiftSetpoint(2));
     buttony.whenPressed(new GearShiftDeploy());
     buttona.whenPressed(new GearShiftRetract());
-    rbumper.whenPressed(new Shoot());
+    rbumper.whenPressed(new Intake());
     
 
     
