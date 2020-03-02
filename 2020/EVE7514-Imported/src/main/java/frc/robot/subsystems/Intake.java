@@ -43,7 +43,7 @@ public class Intake extends Subsystem {
   public void move(double power) {
     
     m_motor1.set(ControlMode.PercentOutput, power);
-    m_motor2.set(ControlMode.PercentOutput, -power);
+    m_motor2.set(ControlMode.PercentOutput, power);
   }
   public void stop() {
     

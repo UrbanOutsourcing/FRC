@@ -22,7 +22,7 @@ public class LiftWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_STICK_Y_AXIS));
+    Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS));
     //Robot.m_lift.move(.5);
   }
 

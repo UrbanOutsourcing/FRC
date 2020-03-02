@@ -75,7 +75,7 @@ public class Constants {
 	 * Choose based on what direction you want to be positive,
 	 * this does not affect motor invert. 
 	 */
-	public static boolean kMotorInvert = false;
+	public static boolean kMotorInvert = true;
 
 	/**
 	 * Gains used in Positon Closed Loop, to be adjusted accordingly

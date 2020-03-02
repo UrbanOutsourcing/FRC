@@ -102,7 +102,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
-    m_drive.tankDrive(left, right);
+    m_drive.tankDrive(right, left);
 
 
   }

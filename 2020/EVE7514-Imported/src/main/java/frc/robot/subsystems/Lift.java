@@ -10,9 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -81,6 +80,7 @@ public class Lift extends PIDSubsystem {
       * This does not affect sensor phase. 
       */
       m_motor.setInverted(Constants.kMotorInvert);
+    
 
       /* Config the peak and nominal outputs, 12V means full 
       m_motor.configNominalOutputForward(0, Constants.kTimeoutMs);
