@@ -79,6 +79,7 @@ public class Lift extends PIDSubsystem {
       * Set based on what direction you want forward/positive to be.
       * This does not affect sensor phase. 
       */
+    
       m_motor.setInverted(Constants.kMotorInvert);
     
 

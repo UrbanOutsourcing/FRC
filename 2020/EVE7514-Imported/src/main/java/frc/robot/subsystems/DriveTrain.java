@@ -102,6 +102,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
+    //Tim 3/2/2020 Changed from left,right to correct drive direction
     m_drive.tankDrive(right, left);
 
 

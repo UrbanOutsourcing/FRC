@@ -22,6 +22,7 @@ public class LiftWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    //Changed to Trigger to resolve conflict with Pivot
     Robot.m_lift.move(Robot.m_oi.m_joystick.getRawAxis(RobotMap.LEFT_TRIGGER_AXIS));
     //Robot.m_lift.move(.5);
   }

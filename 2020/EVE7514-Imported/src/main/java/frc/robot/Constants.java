@@ -75,6 +75,7 @@ public class Constants {
 	 * Choose based on what direction you want to be positive,
 	 * this does not affect motor invert. 
 	 */
+	//Tim 3/2/2020 - Changed from false to true to reverse motor for ratchet
 	public static boolean kMotorInvert = true;
 
 	/**
