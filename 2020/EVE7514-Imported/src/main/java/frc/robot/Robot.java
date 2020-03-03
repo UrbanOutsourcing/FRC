@@ -31,6 +31,8 @@ public class Robot extends TimedRobot {
   public static Lift m_lift;
   public static Intake m_intake;
   public static GearShift m_gearshift;
+  public static LiftArmPivot m_liftarmpivot;
+  public static Hook m_hook;
   public static OI m_oi;
   
 
@@ -49,6 +51,9 @@ public class Robot extends TimedRobot {
     m_intake = new Intake();
     m_gearshift = new GearShift();
     m_oi = new OI();
+    m_liftarmpivot = new LiftArmPivot();
+    m_hook = new Hook();
+
     //CameraServer.getInstance().startAutomaticCapture();
 
     // instantiate the command used for the autonomous period
@@ -60,6 +65,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_pivot);
     SmartDashboard.putData(m_gearshift);
     SmartDashboard.putData(m_intake);
+    SmartDashboard.putData(m_liftarmpivot);
+    SmartDashboard.putData(m_hook);
   }
 
   @Override
@@ -112,6 +119,8 @@ public class Robot extends TimedRobot {
     //m_mdrivetrain.log();
     m_intake.log();
     m_gearshift.log();
+    m_liftarmpivot.log();
+    m_hook.log();
 
   }
 }

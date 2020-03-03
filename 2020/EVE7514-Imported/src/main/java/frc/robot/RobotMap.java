@@ -60,8 +60,12 @@ public class RobotMap {
     public static final int RIGHT_STICK_Y_AXIS = 5;
 
 	// Solenoids
-	public static final int HATCHARM_SOLENOID_DEPLOY = 1;
-	public static final int HATCHARM_SOLENOID_RETRACT = 0;
+	public static final int GEARSHIFT_SOLENOID_DEPLOY = 0;
+	public static final int GEARSHIFT_SOLENOID_RETRACT = 1;
+	public static final int LIFTARMPIVOT_SOLENOID_RETRACT = 4;
+	public static final int LIFTARMPIVOT_SOLENOID_DEPLOY = 5;
+	public static final int HOOK_SOLENOID_RETRACT = 6;
+	public static final int HOOK_SOLENOID_DEPLOY = 7;
 
 	//Limit Switches
 	public static final int TOP_LIMITSWITCH = 0;

@@ -28,12 +28,13 @@ public class GearShiftDeploy extends Command {
 	protected void execute() {
 	  //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
 	  Robot.m_gearshift.Deploy();
+	
 	}
   
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-	  return false; // Runs until interrupted
+	  return true; // Runs until interrupted
 	}
   
 	// Called once after isFinished returns true

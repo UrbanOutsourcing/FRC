@@ -37,6 +37,11 @@ public class OI {
    
     SmartDashboard.putData("Gear Shift Deploy", new GearShiftDeploy());
     SmartDashboard.putData("Gear Shift Retract", new GearShiftRetract());
+    SmartDashboard.putData("Lift Arm Pivot Deploy", new LiftArmPivotDeploy());
+    SmartDashboard.putData("Lift Arm Pivot Retract", new LiftArmPivotRetract());
+    SmartDashboard.putData("Hook Deploy", new HookDeploy());
+    SmartDashboard.putData("Hook Retract", new HookRetract());
+
     //SmartDashboard.putData("Lift With Joystick", new LiftWithJoystick());
     SmartDashboard.putData("Pivot  45", new SetPivotSetpoint(45));
     SmartDashboard.putData("Pivot  90", new SetPivotSetpoint(720));
@@ -44,15 +49,18 @@ public class OI {
 
     // Gamepad 1 Buttons
     
-    final JoystickButton rtrigger = new JoystickButton(m_drive_joystick, 5);
-    final JoystickButton rbumper = new JoystickButton(m_drive_joystick, 6);    
+    final JoystickButton lbumper = new JoystickButton(m_drive_joystick, 5);
+   final JoystickButton rbumper = new JoystickButton(m_drive_joystick, 6);  
+   
     
     // Gamepad 2 Buttons
     
+    final JoystickButton buttonb = new JoystickButton(m_joystick, 2);
+    final JoystickButton buttonx = new JoystickButton(m_joystick, 3);
     final JoystickButton buttona = new JoystickButton(m_joystick, 1);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
 
-    final JoystickButton lbumper = new JoystickButton(m_joystick, 5);
+    
     
 
     final JoystickButton dpadUp = new JoystickButton(m_joystick, 7);
@@ -65,9 +73,17 @@ public class OI {
     // Connect the buttons to commands
     dpadUp.whenPressed(new SetLiftSetpoint(6));
     dpadDown.whenPressed(new SetLiftSetpoint(2));
-    buttony.whenPressed(new GearShiftDeploy());
-    buttona.whenPressed(new GearShiftRetract());
-    rbumper.whenPressed(new Intake());
+    //buttony.whenPressed(new GearShiftDeploy());
+    lbumper.whenPressed(new GearShiftDeploy());
+    rbumper.whenPressed(new GearShiftRetract());
+    //buttona.whenPressed(new GearShiftRetract());
+    buttonx.whenPressed(new LiftArmPivotRetract());
+    buttonb.whenPressed(new LiftArmPivotDeploy());
+    buttona.whenPressed(new HookDeploy());
+    buttony.whenPressed(new HookRetract());
+
+   // rbumper.whenPressed(new Intake());
+
     
 
     

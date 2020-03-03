@@ -16,31 +16,32 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class GearShift extends Subsystem {
+
+ public class LiftArmPivot extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	DoubleSolenoid armSolenoid = null;
+	DoubleSolenoid pivotSolenoid = null;
 	
 
-	public GearShift() {
+	public LiftArmPivot() {
 		super();
-		armSolenoid = new DoubleSolenoid(RobotMap.GEARSHIFT_SOLENOID_DEPLOY,
-				RobotMap.GEARSHIFT_SOLENOID_RETRACT);
-				armSolenoid.set(Value.kOff);
-		addChild("GearShift", armSolenoid);
-		SmartDashboard.putData("Gear Shift", (DoubleSolenoid) armSolenoid);
+		pivotSolenoid = new DoubleSolenoid(RobotMap.LIFTARMPIVOT_SOLENOID_DEPLOY,
+				RobotMap.LIFTARMPIVOT_SOLENOID_RETRACT);
+				pivotSolenoid.set(Value.kOff);
+		addChild("LiftArmPivot", pivotSolenoid);
+		SmartDashboard.putData("Lift Arm Pivot", (DoubleSolenoid) pivotSolenoid);
 	
 	}
 
 	public void Deploy() {
 		
-		//armSolenoid.set(Value.kOff);
-		armSolenoid.set(Value.kForward);
+		//pivotSolenoid.set(Value.kOff);
+		pivotSolenoid.set(Value.kForward);
 	}
 
 	public void Retract() {
-		//armSolenoid.set(Value.kOff);
-		armSolenoid.set(Value.kReverse);
+		//pivotSolenoid.set(Value.kOff);
+		pivotSolenoid.set(Value.kReverse);
 		
 	}
 
@@ -50,7 +51,7 @@ public class GearShift extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void log() {
-		SmartDashboard.putData("Gear Shift", (DoubleSolenoid) armSolenoid);
+		SmartDashboard.putData("Lift Arm Pivot", (DoubleSolenoid) pivotSolenoid);
 		
 	}
 }

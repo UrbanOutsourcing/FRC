@@ -13,12 +13,12 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class GearShiftRetract extends InstantCommand {
+public class HookRetract extends InstantCommand {
 	/**
 	 * Add your docs here.
 	 */
 	
-	public GearShiftRetract() {
+	public HookRetract() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -28,7 +28,7 @@ public class GearShiftRetract extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void execute() {
-		Robot.m_gearshift.Retract();
+		Robot.m_hook.Retract();
 	}
 
 		// Make this return true when this Command no longer needs to run execute()
