@@ -59,6 +59,8 @@ public class OI {
     final JoystickButton buttonx = new JoystickButton(m_joystick, 3);
     final JoystickButton buttona = new JoystickButton(m_joystick, 1);
     final JoystickButton buttony = new JoystickButton(m_joystick, 4);
+    //final JoystickButton lbumper2 = new JoystickButton(m_joystick, 5);
+   // final JoystickButton rbumper2 = new JoystickButton(m_joystick, 6); 
 
     
     

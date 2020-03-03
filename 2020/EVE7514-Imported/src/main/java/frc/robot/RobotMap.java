@@ -33,6 +33,7 @@ public class RobotMap {
 	public static final int PIVOT = 6;
 	public static final int INTAKE1 = 1;
 	public static final int INTAKE2 = 8;
+	public static final int CLIMBER = 7;
 
 
 
@@ -54,10 +55,11 @@ public class RobotMap {
 	public static final int OI_ATTACHMENTS_CONTROLLER = 1;
 	public static final int DRIVER_CONTROLLER_MOVE_AXIS = 1;
 	public static final int DRIVER_CONTROLLER_ROTATE_AXIS = 2;
-    public static final int LEFT_TRIGGER_AXIS = 3;
-	public static final int RIGHT_TRIGGER_AXIS = 2;
+    public static final int LEFT_TRIGGER_AXIS = 2;
+	public static final int RIGHT_TRIGGER_AXIS = 3;
 	public static final int LEFT_STICK_Y_AXIS = 1;
-    public static final int RIGHT_STICK_Y_AXIS = 5;
+	public static final int RIGHT_STICK_Y_AXIS = 5;
+	public static final int RIGHT_STICK_X_AXIS = 4;
 
 	// Solenoids
 	public static final int GEARSHIFT_SOLENOID_DEPLOY = 0;

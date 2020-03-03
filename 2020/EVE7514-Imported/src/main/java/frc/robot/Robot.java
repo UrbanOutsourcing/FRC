@@ -33,7 +33,9 @@ public class Robot extends TimedRobot {
   public static GearShift m_gearshift;
   public static LiftArmPivot m_liftarmpivot;
   public static Hook m_hook;
+  public static Climber m_climber;
   public static OI m_oi;
+
   
 
   /**
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_liftarmpivot = new LiftArmPivot();
     m_hook = new Hook();
+    m_climber = new Climber();
 
     //CameraServer.getInstance().startAutomaticCapture();
 
@@ -67,6 +70,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(m_intake);
     SmartDashboard.putData(m_liftarmpivot);
     SmartDashboard.putData(m_hook);
+    SmartDashboard.putData(m_climber);
   }
 
   @Override
@@ -121,6 +125,7 @@ public class Robot extends TimedRobot {
     m_gearshift.log();
     m_liftarmpivot.log();
     m_hook.log();
+    m_climber.log();
 
   }
 }
