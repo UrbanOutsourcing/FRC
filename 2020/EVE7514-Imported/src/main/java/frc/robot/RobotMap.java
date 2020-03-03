@@ -21,19 +21,19 @@ public class RobotMap {
 	// public static int rightMotor = 2;
 
 	// Motors
-	public static final int DRIVETRAIN_LEFT_FRONT = 1;
-	public static final int DRIVETRAIN_LEFT_BACK = 0;
-	public static final int DRIVETRAIN_RIGHT_FRONT = 3;
-	public static final int DRIVETRAIN_RIGHT_BACK = 2;
+	public static final int DRIVETRAIN_LEFT_FRONT = 4;
+	public static final int DRIVETRAIN_LEFT_BACK = 5;
+	public static final int DRIVETRAIN_LEFT_TOP = 3;
+	public static final int DRIVETRAIN_RIGHT_FRONT = 10;
+	public static final int DRIVETRAIN_RIGHT_BACK = 9;
+	public static final int DRIVETRAIN_RIGHT_TOP = 0;
+	
+	
+	public static final int LIFT = 2;
+	public static final int PIVOT = 6;
+	public static final int INTAKE1 = 1;
+	public static final int INTAKE2 = 8;
 
-	public static final int DRIVETRAIN_LF = 0;
-	public static final int DRIVETRAIN_LR = 1;
-	public static final int DRIVETRAIN_RF = 2;
-	public static final int DRIVETRAIN_RR = 3;
-
-	public static final int LIFT = 6;
-	public static final int PIVOT = 5;
-	public static final int SHOOTER = 4;
 
 
 

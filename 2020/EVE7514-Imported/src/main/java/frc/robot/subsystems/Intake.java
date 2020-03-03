@@ -17,9 +17,11 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Shooter extends Subsystem {
+public class Intake extends Subsystem {
   
-  private final WPI_VictorSPX m_motor;
+  private final WPI_VictorSPX m_motor1;
+  private final WPI_VictorSPX m_motor2;
+
   
   
   //private final WPI_VictorSPX m_motor = new WPI_VictorSPX(7);
@@ -27,27 +29,31 @@ public class Shooter extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new ShootWithJoystick());
+    setDefaultCommand(new IntakeWithJoystick());
   }
-  public Shooter() {
+  public Intake() {
     super();
 
     // Let's name everything on the LiveWindow
-    m_motor = new WPI_VictorSPX(RobotMap.SHOOTER);
+    m_motor1 = new WPI_VictorSPX(RobotMap.INTAKE1);
+    m_motor2 = new WPI_VictorSPX(RobotMap.INTAKE2);
      
   }
   
   public void move(double power) {
     
-    m_motor.set(ControlMode.PercentOutput, power);
+    m_motor1.set(ControlMode.PercentOutput, power);
+    m_motor2.set(ControlMode.PercentOutput, -power);
   }
   public void stop() {
     
-    m_motor.set(ControlMode.PercentOutput, 0);
+    m_motor1.set(ControlMode.PercentOutput, 0);
+    m_motor2.set(ControlMode.PercentOutput, 0);
+
   }
   public void log() {
    
-    SmartDashboard.putNumber("Shooter Power", m_motor.getMotorOutputPercent());
+    SmartDashboard.putNumber("Intake Power", m_motor1.getMotorOutputPercent());
     
   }
 }

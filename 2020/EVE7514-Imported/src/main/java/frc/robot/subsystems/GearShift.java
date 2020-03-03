@@ -16,18 +16,18 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class HatchArm extends Subsystem {
+public class GearShift extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	DoubleSolenoid armSolenoid = null;
 
-	public HatchArm() {
+	public GearShift() {
 		super();
 		armSolenoid = new DoubleSolenoid(RobotMap.HATCHARM_SOLENOID_DEPLOY,
 				RobotMap.HATCHARM_SOLENOID_RETRACT);
 				armSolenoid.set(Value.kOff);
-		addChild("Arm", armSolenoid);
-		SmartDashboard.putData("Hatch Arm", (DoubleSolenoid) armSolenoid);
+		addChild("GearShift", armSolenoid);
+		SmartDashboard.putData("Gear Shift", (DoubleSolenoid) armSolenoid);
 	
 	}
 
@@ -49,7 +49,7 @@ public class HatchArm extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void log() {
-		SmartDashboard.putData("Hatch Arm", (DoubleSolenoid) armSolenoid);
+		SmartDashboard.putData("Gear Shift", (DoubleSolenoid) armSolenoid);
 		
 	}
 }

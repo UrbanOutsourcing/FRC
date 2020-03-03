@@ -12,22 +12,22 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class HatchArmDeploy extends Command {
+public class GearShiftDeploy extends Command {
 	/**
 	 * Add your docs here.
 	 */
-	public HatchArmDeploy() {
+	public GearShiftDeploy() {
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.m_hatcharm);
+		requires(Robot.m_gearshift);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 	  //Robot.m_drivetrain.drive(Robot.m_oi.getJoystick());
-	  Robot.m_hatcharm.Deploy();
+	  Robot.m_gearshift.Deploy();
 	}
   
 	// Make this return true when this Command no longer needs to run execute()
