@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CameraServer;
 import frc.robot.subsystems.*;
 
 /**
@@ -24,9 +23,11 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   Command m_autonomousCommand;
 
-  public static DriveTrain m_drivetrain;
-  public static eDriveTrain m_edrivetrain;
-  public static mDriveTrain m_mdrivetrain;
+  //public static DriveTrain m_drivetrain;
+  //public static mDriveTrain m_drivetrain;
+  public static eDriveTrain m_drivetrain;
+  //public static eDriveTrain m_edrivetrain;
+ 
   public static Pivot m_pivot;
   public static Lift m_lift;
   public static Intake m_intake;
@@ -41,9 +42,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {//
     // Initialize all subsystems
-    m_drivetrain = new DriveTrain();
-    //m_edrivetrain = new eDriveTrain();
-     //m_edrivetrain = new mDriveTrain();
+    //m_drivetrain = new DriveTrain();
+    m_drivetrain = new eDriveTrain();
+     //m_drivetrain = new mDriveTrain();
     m_pivot = new Pivot();
     m_lift = new Lift();
     m_intake = new Intake();
@@ -108,8 +109,6 @@ public class Robot extends TimedRobot {
     m_lift.log();
     m_pivot.log();
     m_drivetrain.log();
-    //m_edrivetrain.log();
-    //m_mdrivetrain.log();
     m_intake.log();
     m_gearshift.log();
 

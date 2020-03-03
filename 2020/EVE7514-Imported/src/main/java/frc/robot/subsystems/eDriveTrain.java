@@ -17,9 +17,15 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,63 +42,59 @@ import frc.robot.commands.*;
  */
 public class eDriveTrain extends Subsystem {
   private final TalonSRX m_leftmaster;
-  private final BaseMotorController m_leftrear;
   private final TalonSRX m_rightmaster;
-  private final BaseMotorController m_rightrear;
-  
+  private final VictorSPX m_leftrear;
+  private final VictorSPX m_rightrear;
+  private final VictorSPX m_lefttop;
+  private final VictorSPX m_righttop;
 
-    /**
-   * Create a new pivot subsystem.
-   */
+  // Set up Controller Group for TeleOp
+  private final SpeedController m_leftMotor
+    = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_TOP));
+    private final SpeedController m_rightMotor
+    = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_TOP));
+
+    private final DifferentialDrive m_drive
+    = new DifferentialDrive(m_leftMotor, m_rightMotor);
+
+    
   public eDriveTrain() {
     super();
 
     m_leftmaster = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
     m_rightmaster = new TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT);
-    m_leftrear = new TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK);
-    m_rightrear = new TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK);
+    m_leftrear = new VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK);
+    m_rightrear = new VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK);
+    m_lefttop = new VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP);
+    m_righttop = new VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP);
 
+    
+    
+    
     // *TalonSRX Encoder Configuration
     // *Config the sensor used for Primary PID and sensor direction
 
-    m_leftmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
+    m_leftmaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_PRIMARY,
         Constants.kTimeoutMs);
-    m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
-        Constants.kTimeoutMs);
+    //m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
+    //    Constants.kTimeoutMs); 
 
-    m_leftrear.configRemoteFeedbackFilter(m_leftmaster.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor,
-        Constants.REMOTE_0, Constants.kTimeoutMs);
-    m_rightrear.configRemoteFeedbackFilter(m_rightmaster.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor,
-        Constants.REMOTE_0, Constants.kTimeoutMs);
+    // Configure Slave Encoder
+    m_rightmaster.configRemoteFeedbackFilter(m_leftmaster.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor,
+        Constants.REMOTE_1, Constants.kTimeoutMs);
+    
 
     /* Setup Sum signal to be used for Distance */
-    m_leftmaster.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, Constants.kTimeoutMs); // Feedback
+    m_rightmaster.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor1, Constants.kTimeoutMs); // Feedback
                                                                                                         // Device of
                                                                                                         // Remote Talon
-    m_leftmaster.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kTimeoutMs); // Quadrature
+    m_rightmaster.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kTimeoutMs); // Quadrature
                                                                                                                    // Encoder
                                                                                                                    // of
                                                                                                                    // current
                                                                                                                    // Talon
 
-    /* Configure Sum [Sum of both QuadEncoders] to be used for Primary PID Index */
-    m_leftmaster.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, Constants.PID_PRIMARY, Constants.kTimeoutMs);
-
-    /* Scale Feedback by 0.5 to half the sum of Distance */
-    m_leftmaster.configSelectedFeedbackCoefficient(0.5, // Coefficient
-        Constants.PID_PRIMARY, // PID Slot of Source
-        Constants.kTimeoutMs); // Configuration Timeout
-
-    /* Setup Sum signal to be used for Distance */
-    m_rightmaster.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor0, Constants.kTimeoutMs); // Feedback
-                                                                                                         // Device of
-                                                                                                         // Remote Talon
-    m_rightmaster.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kTimeoutMs); // Quadrature
-                                                                                                                    // Encoder
-                                                                                                                    // of
-                                                                                                                    // current
-                                                                                                                    // Talon
-
+    
     /* Configure Sum [Sum of both QuadEncoders] to be used for Primary PID Index */
     m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, Constants.PID_PRIMARY, Constants.kTimeoutMs);
 
@@ -101,6 +103,16 @@ public class eDriveTrain extends Subsystem {
         Constants.PID_PRIMARY, // PID Slot of Source
         Constants.kTimeoutMs); // Configuration Timeout
 
+    /* Configure Difference [Difference between both QuadEncoders] to be used for Auxiliary PID Index */
+		m_rightmaster.configSelectedFeedbackSensor(	FeedbackDevice.SensorDifference, 
+    Constants.PID_TURN, 
+    Constants.kTimeoutMs);
+
+   /* Scale the Feedback Sensor using a coefficient */
+    m_rightmaster.configSelectedFeedbackCoefficient(	1,
+      Constants.PID_TURN, 
+      Constants.kTimeoutMs);
+
     /* Configure output and sensor direction */
     m_leftmaster.setInverted(false);
     m_leftmaster.setSensorPhase(true);
@@ -108,9 +120,10 @@ public class eDriveTrain extends Subsystem {
     m_rightmaster.setSensorPhase(true);
 
     /* Set status frame periods to ensure we don't have stale data */
-    m_rightmaster.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, Constants.kTimeoutMs);
-    m_rightmaster.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, Constants.kTimeoutMs);
-    m_leftmaster.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, Constants.kTimeoutMs);
+		m_rightmaster.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, Constants.kTimeoutMs);
+		m_rightmaster.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, Constants.kTimeoutMs);
+		m_rightmaster.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 20, Constants.kTimeoutMs);
+		m_leftmaster.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, Constants.kTimeoutMs);
 
     /* Configure neutral deadband */
     m_rightmaster.configNeutralDeadband(Constants.kNeutralDeadband, Constants.kTimeoutMs);
@@ -129,14 +142,39 @@ public class eDriveTrain extends Subsystem {
     m_rightmaster.configPeakOutputForward(+1.0, Constants.kTimeoutMs);
     m_rightmaster.configPeakOutputReverse(-1.0, Constants.kTimeoutMs);
 
-    /* FPID Gains for Motion Magic servo */
-    m_rightmaster.config_kP(Constants.kSlot_Distanc, Constants.kGains_Distanc.kP, Constants.kTimeoutMs);
-    m_rightmaster.config_kI(Constants.kSlot_Distanc, Constants.kGains_Distanc.kI, Constants.kTimeoutMs);
-    m_rightmaster.config_kD(Constants.kSlot_Distanc, Constants.kGains_Distanc.kD, Constants.kTimeoutMs);
-    m_rightmaster.config_kF(Constants.kSlot_Distanc, Constants.kGains_Distanc.kF, Constants.kTimeoutMs);
-    m_rightmaster.config_IntegralZone(Constants.kSlot_Distanc, Constants.kGains_Distanc.kIzone, Constants.kTimeoutMs);
-    m_rightmaster.configClosedLoopPeakOutput(Constants.kSlot_Distanc, Constants.kGains_Distanc.kPeakOutput,
-        Constants.kTimeoutMs);
+   
+		/* FPID Gains for distance servo */
+		m_rightmaster.config_kP(Constants.kSlot_Distanc, Constants.kGains_Distanc.kP, Constants.kTimeoutMs);
+		m_rightmaster.config_kI(Constants.kSlot_Distanc, Constants.kGains_Distanc.kI, Constants.kTimeoutMs);
+		m_rightmaster.config_kD(Constants.kSlot_Distanc, Constants.kGains_Distanc.kD, Constants.kTimeoutMs);
+		m_rightmaster.config_kF(Constants.kSlot_Distanc, Constants.kGains_Distanc.kF, Constants.kTimeoutMs);
+		m_rightmaster.config_IntegralZone(Constants.kSlot_Distanc, Constants.kGains_Distanc.kIzone, Constants.kTimeoutMs);
+		m_rightmaster.configClosedLoopPeakOutput(Constants.kSlot_Distanc, Constants.kGains_Distanc.kPeakOutput, Constants.kTimeoutMs);
+
+		/* FPID Gains for turn servo */
+		m_rightmaster.config_kP(Constants.kSlot_Turning, Constants.kGains_Turning.kP, Constants.kTimeoutMs);
+		m_rightmaster.config_kI(Constants.kSlot_Turning, Constants.kGains_Turning.kI, Constants.kTimeoutMs);
+		m_rightmaster.config_kD(Constants.kSlot_Turning, Constants.kGains_Turning.kD, Constants.kTimeoutMs);
+		m_rightmaster.config_kF(Constants.kSlot_Turning, Constants.kGains_Turning.kF, Constants.kTimeoutMs);
+		m_rightmaster.config_IntegralZone(Constants.kSlot_Turning, Constants.kGains_Turning.kIzone, Constants.kTimeoutMs);
+		m_rightmaster.configClosedLoopPeakOutput(Constants.kSlot_Turning, Constants.kGains_Turning.kPeakOutput, Constants.kTimeoutMs);
+			
+		/* 1ms per loop.  PID loop can be slowed down if need be.
+		 * For example,
+		 * - if sensor updates are too slow
+		 * - sensor deltas are very small per update, so derivative error never gets large enough to be useful.
+		 * - sensor movement is very slow causing the derivative error to be near zero.
+		 */
+        int closedLoopTimeMs = 1;
+        m_rightmaster.configClosedLoopPeriod(0, closedLoopTimeMs, Constants.kTimeoutMs);
+        m_rightmaster.configClosedLoopPeriod(1, closedLoopTimeMs, Constants.kTimeoutMs);
+
+		/* configAuxPIDPolarity(boolean invert, int timeoutMs)
+		 * false means talon's local output is PID0 + PID1, and other side Talon is PID0 - PID1
+		 * true means talon's local output is PID0 - PID1, and other side Talon is PID0 + PID1
+		 */
+		m_rightmaster.configAuxPIDPolarity(false, Constants.kTimeoutMs);
+
      zeroSensors();   
   }
 
@@ -161,7 +199,7 @@ public class eDriveTrain extends Subsystem {
   }
 
   /* Zero quadrature encoders on Talons */
-  void zeroSensors() {
+  public void zeroSensors() {
     m_leftmaster.getSensorCollection().setQuadraturePosition(0, Constants.kTimeoutMs);
     m_rightmaster.getSensorCollection().setQuadraturePosition(0, Constants.kTimeoutMs);
     System.out.println("[Quadrature Encoders] All sensors are zeroed.\n");
@@ -170,17 +208,14 @@ public class eDriveTrain extends Subsystem {
   /**
    * Tank style driving for the DriveTrain.
    *
-   * @param left  Speed in range [-1,1]
+   * @param left Speed in range [-1,1]
    * @param right Speed in range [-1,1]
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
-    //m_drive.tankDrive(left, right);
-    m_rightmaster.set(ControlMode.PercentOutput, right);
-    //m_rightrear.follow(m_rightmaster);
-    m_leftmaster.set(ControlMode.PercentOutput, left);
-    //m_leftrear.follow(m_leftmaster);
+    m_drive.tankDrive(left, right);
   }
+
 
   /**
    * Tank style driving for the DriveTrain.
@@ -202,10 +237,26 @@ public class eDriveTrain extends Subsystem {
     /* calculate targets from gamepad inputs */
     double target_sensorUnits = (distance * 12) * Constants.kRotationsPerInch;
 
-    m_rightmaster.set(ControlMode.Position, target_sensorUnits);
-    m_leftmaster.follow(m_rightmaster);
-    m_leftrear.follow(m_rightmaster);
+    m_leftmaster.set(ControlMode.Position, target_sensorUnits);
+    m_rightmaster.follow(m_leftmaster);
+    m_leftrear.follow(m_leftmaster);
+    m_rightrear.follow(m_leftmaster);
+    m_righttop.follow(m_leftmaster);
+    m_lefttop.follow(m_leftmaster);
+  }
+
+  public void turn(double distance) {
+    SmartDashboard.putNumber("Drive Distance", distance);
+
+    /* calculate targets from gamepad inputs */
+    double target_sensorUnits = (distance * 12) * Constants.kRotationsPerInch;
+
+    m_leftmaster.set(ControlMode.Position, target_sensorUnits);
+    m_rightmaster.set(ControlMode.Position, -target_sensorUnits);
+    m_leftrear.follow(m_leftmaster);
     m_rightrear.follow(m_rightmaster);
+    m_righttop.follow(m_rightmaster);
+    m_lefttop.follow(m_leftmaster);
   }
 
   /**

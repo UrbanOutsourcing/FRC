@@ -40,6 +40,14 @@ public class Constants {
 	 */
 	public final static double kTurnTravelUnitsPerRotation = 3600;
 	
+
+	/**
+	 * Empirically measure what the difference between encoders per 360'
+	 * Drive the robot in clockwise rotations and measure the units per rotation.
+	 * Drive the robot in counter clockwise rotations and measure the units per rotation.
+	 * Take the average of the two.
+	 */
+	public final static int kEncoderUnitsPerRotation = 51711;
 	
 	/**
 	 * Motor neutral dead-band, set to the minimum 0.1%.
