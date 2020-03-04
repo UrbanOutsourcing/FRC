@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.SensorTerm;
@@ -48,14 +48,16 @@ public class eDriveTrain extends Subsystem {
   private final VictorSPX m_lefttop;
   private final VictorSPX m_righttop;
 
+
+
   // Set up Controller Group for TeleOp
-  private final SpeedController m_leftMotor
+ /* private final SpeedController m_leftMotor
     = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_TOP));
     private final SpeedController m_rightMotor
     = new SpeedControllerGroup(new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_FRONT), new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_BACK), new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_TOP));
 
     private final DifferentialDrive m_drive
-    = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    = new DifferentialDrive(m_leftMotor, m_rightMotor); */
 
     
   public eDriveTrain() {
@@ -69,40 +71,37 @@ public class eDriveTrain extends Subsystem {
     m_righttop = new VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP);
 
     
-    
+    m_leftmaster.setNeutralMode(NeutralMode.Brake);
+    m_rightmaster.setNeutralMode(NeutralMode.Brake);
+    m_leftrear.setNeutralMode(NeutralMode.Coast);
+    m_rightrear.setNeutralMode(NeutralMode.Coast);
+    m_lefttop.setNeutralMode(NeutralMode.Coast);
+    m_righttop.setNeutralMode(NeutralMode.Coast);
     
     // *TalonSRX Encoder Configuration
     // *Config the sensor used for Primary PID and sensor direction
 
-    m_leftmaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_PRIMARY,
+    m_leftmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
         Constants.kTimeoutMs);
-    //m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
-    //    Constants.kTimeoutMs); 
+    /*m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.PID_PRIMARY,
+        Constants.kTimeoutMs); */
 
     // Configure Slave Encoder
     m_rightmaster.configRemoteFeedbackFilter(m_leftmaster.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor,
         Constants.REMOTE_1, Constants.kTimeoutMs);
     
-
     /* Setup Sum signal to be used for Distance */
-    m_rightmaster.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor1, Constants.kTimeoutMs); // Feedback
-                                                                                                        // Device of
-                                                                                                        // Remote Talon
-    m_rightmaster.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kTimeoutMs); // Quadrature
-                                                                                                                   // Encoder
-                                                                                                                   // of
-                                                                                                                   // current
-                                                                                                                   // Talon
+    m_rightmaster.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor1, Constants.kTimeoutMs); 
+    m_rightmaster.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kTimeoutMs); 
 
-    
     /* Configure Sum [Sum of both QuadEncoders] to be used for Primary PID Index */
     m_rightmaster.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, Constants.PID_PRIMARY, Constants.kTimeoutMs);
-
+ 
     /* Scale Feedback by 0.5 to half the sum of Distance */
     m_rightmaster.configSelectedFeedbackCoefficient(0.5, // Coefficient
         Constants.PID_PRIMARY, // PID Slot of Source
         Constants.kTimeoutMs); // Configuration Timeout
-
+ 
     /* Configure Difference [Difference between both QuadEncoders] to be used for Auxiliary PID Index */
 		m_rightmaster.configSelectedFeedbackSensor(	FeedbackDevice.SensorDifference, 
     Constants.PID_TURN, 
@@ -115,7 +114,7 @@ public class eDriveTrain extends Subsystem {
 
     /* Configure output and sensor direction */
     m_leftmaster.setInverted(false);
-    m_leftmaster.setSensorPhase(true);
+    m_leftmaster.setSensorPhase(false);
     m_rightmaster.setInverted(true);
     m_rightmaster.setSensorPhase(true);
 
@@ -137,10 +136,10 @@ public class eDriveTrain extends Subsystem {
      * Max out the peak output (for all modes). However you can limit the output of
      * a given PID object with configClosedLoopPeakOutput().
      */
-    m_leftmaster.configPeakOutputForward(+1.0, Constants.kTimeoutMs);
-    m_leftmaster.configPeakOutputReverse(-1.0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputForward(+1.0, Constants.kTimeoutMs);
-    m_rightmaster.configPeakOutputReverse(-1.0, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputForward(+0.25, Constants.kTimeoutMs);
+    m_leftmaster.configPeakOutputReverse(-0.25, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputForward(+0.25, Constants.kTimeoutMs);
+    m_rightmaster.configPeakOutputReverse(-0.25, Constants.kTimeoutMs);
 
    
 		/* FPID Gains for distance servo */
@@ -167,7 +166,7 @@ public class eDriveTrain extends Subsystem {
 		 */
         int closedLoopTimeMs = 1;
         m_rightmaster.configClosedLoopPeriod(0, closedLoopTimeMs, Constants.kTimeoutMs);
-        m_rightmaster.configClosedLoopPeriod(1, closedLoopTimeMs, Constants.kTimeoutMs);
+        m_leftmaster.configClosedLoopPeriod(1, closedLoopTimeMs, Constants.kTimeoutMs);
 
 		/* configAuxPIDPolarity(boolean invert, int timeoutMs)
 		 * false means talon's local output is PID0 + PID1, and other side Talon is PID0 - PID1
@@ -192,10 +191,10 @@ public class eDriveTrain extends Subsystem {
    */
   public void log() {
 
-    SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Right Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Right Target", m_rightmaster.getClosedLoopTarget(Constants.PID_TURN));
+    SmartDashboard.putNumber("DriveTrain Right Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_TURN));
     SmartDashboard.putNumber("DriveTrain Left Target", m_leftmaster.getClosedLoopTarget(Constants.PID_PRIMARY));
-    SmartDashboard.putNumber("DriveTrain Left Position",  m_rightmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
+    SmartDashboard.putNumber("DriveTrain Left Position",  m_leftmaster.getSelectedSensorPosition(Constants.PID_PRIMARY));
   }
 
   /* Zero quadrature encoders on Talons */
@@ -213,7 +212,7 @@ public class eDriveTrain extends Subsystem {
    */
   public void drive(double left, double right) {
     SmartDashboard.putNumber("Left Power", left);
-    m_drive.tankDrive(left, right);
+   //m_drive.tankDrive(left, right);
   }
 
 
@@ -238,13 +237,27 @@ public class eDriveTrain extends Subsystem {
     double target_sensorUnits = (distance * 12) * Constants.kRotationsPerInch;
 
     m_leftmaster.set(ControlMode.Position, target_sensorUnits);
-    m_rightmaster.follow(m_leftmaster);
-    m_leftrear.follow(m_leftmaster);
-    m_rightrear.follow(m_leftmaster);
-    m_righttop.follow(m_leftmaster);
-    m_lefttop.follow(m_leftmaster);
-  }
+    m_rightmaster.set(ControlMode.Position, target_sensorUnits);
 
+    /*m_leftmaster.set(ControlMode.PercentOutput, .05);
+    m_rightmaster.set(ControlMode.PercentOutput, .05);
+    m_rightrear.set(ControlMode.PercentOutput, .05);
+    m_leftrear.set(ControlMode.PercentOutput, .05);
+    m_righttop.set(ControlMode.PercentOutput, .05);
+    m_lefttop.set(ControlMode.PercentOutput, .05);*/
+    /*m_rightmaster.follow(m_leftmaster);
+    m_leftrear.follow(m_leftmaster);
+    m_rightrear.follow(m_rightmaster);
+    m_righttop.follow(m_rightmaster);
+    m_lefttop.follow(m_leftmaster);*/
+  }
+  public void drivetotarget(double distance) {
+    SmartDashboard.putNumber("Drive Distance", distance);
+
+     m_leftmaster.set(ControlMode.PercentOutput, 1);
+     m_rightmaster.set(ControlMode.PercentOutput, 1);
+    
+    }
   public void turn(double distance) {
     SmartDashboard.putNumber("Drive Distance", distance);
 

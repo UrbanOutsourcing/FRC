@@ -15,9 +15,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.TimerTask;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -45,6 +47,11 @@ public class DriveTrain extends Subsystem {
   private final Encoder m_rightEncoder = new Encoder(RobotMap.DRIVETRAIN_RIGHT_CHANNELA, RobotMap.DRIVETRAIN_RIGHT_CHANNELB);
   private final AnalogInput m_rangefinder = new AnalogInput(6);
   private final AnalogGyro m_gyro = new AnalogGyro(1);
+  private final Timer timer = new Timer();
+  //private final TimerTask task = new Helper();
+
+
+
 
   /**
    * Create a new drive train subsystem.
@@ -104,7 +111,6 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Left Power", left);
     m_drive.tankDrive(left, right);
 
-
   }
 
   /**
@@ -120,7 +126,14 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("Turn Degrees", rotate);
     m_drive.arcadeDrive(left, rotate);
   }
-
+ 
+  public void driveto(double left, double right, double rotate) {
+    
+     for ( int i = 0; i<1000;i++) 
+     {drive(1,1);
+     }
+    
+  }
   /**
    * Get the robot's heading.
    *

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.*;
 
 /**
@@ -25,8 +26,8 @@ public class Robot extends TimedRobot {
 
   //public static DriveTrain m_drivetrain;
   //public static mDriveTrain m_drivetrain;
-  public static eDriveTrain m_drivetrain;
-  //public static eDriveTrain m_edrivetrain;
+  public static DriveTrain m_drivetrain;
+  public static eDriveTrain m_edrivetrain;
  
   public static Pivot m_pivot;
   public static Lift m_lift;
@@ -43,8 +44,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {//
     // Initialize all subsystems
     //m_drivetrain = new DriveTrain();
-    m_drivetrain = new eDriveTrain();
-     //m_drivetrain = new mDriveTrain();
+    m_drivetrain = new DriveTrain();
+     m_edrivetrain = new eDriveTrain();
     m_pivot = new Pivot();
     m_lift = new Lift();
     m_intake = new Intake();
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
     //CameraServer.getInstance().startAutomaticCapture();
 
     // instantiate the command used for the autonomous period
+     m_autonomousCommand = new Autonomous();
 
     // Show what command your subsystem is running on the SmartDashboard
     //SmartDashboard.putData(m_edrivetrain);
@@ -65,7 +67,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand.start(); // schedule the autonomous command (example)
+    //m_autonomousCommand.start(); // schedule the autonomous command (example)
   }
 
   /**
@@ -83,7 +85,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    //m_autonomousCommand.cancel();
+    m_autonomousCommand.cancel();
   }
 
   /**
@@ -108,7 +110,7 @@ public class Robot extends TimedRobot {
   private void log() {
     m_lift.log();
     m_pivot.log();
-    m_drivetrain.log();
+    //m_drivetrain.log();
     m_intake.log();
     m_gearshift.log();
 
