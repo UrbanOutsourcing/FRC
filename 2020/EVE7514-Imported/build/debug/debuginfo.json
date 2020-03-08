@@ -1,0 +1,9 @@
+[
+  {
+    "artifact": "frcJava (in project EVE7514-Imported)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "EVE7514-Imported",
+    "language": "java"
+  }
+]
